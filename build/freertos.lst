@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\Simon\AppData\Local\Temp\ccx3lgto.s 			page 1
+ARM GAS  C:\Users\Simon\AppData\Local\Temp\cckNKhym.s 			page 1
 
 
    1              		.cpu cortex-m7
@@ -11,7 +11,7 @@ ARM GAS  C:\Users\Simon\AppData\Local\Temp\ccx3lgto.s 			page 1
    8              		.eabi_attribute 24, 1
    9              		.eabi_attribute 25, 1
   10              		.eabi_attribute 26, 1
-  11              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 30, 2
   12              		.eabi_attribute 34, 1
   13              		.eabi_attribute 18, 4
   14              		.file	"freertos.c"
@@ -20,13 +20,14 @@ ARM GAS  C:\Users\Simon\AppData\Local\Temp\ccx3lgto.s 			page 1
   17              		.cfi_sections	.debug_frame
   18              		.section	.text.StartDefaultTask,"ax",%progbits
   19              		.align	1
-  20              		.global	StartDefaultTask
-  21              		.syntax unified
-  22              		.thumb
-  23              		.thumb_func
-  25              	StartDefaultTask:
-  26              	.LFB152:
-  27              		.file 1 "Core/Src/freertos.c"
+  20              		.p2align 2,,3
+  21              		.global	StartDefaultTask
+  22              		.syntax unified
+  23              		.thumb
+  24              		.thumb_func
+  26              	StartDefaultTask:
+  27              	.LFB152:
+  28              		.file 1 "Core/Src/freertos.c"
    1:Core/Src/freertos.c **** /* USER CODE BEGIN Header */
    2:Core/Src/freertos.c **** /**
    3:Core/Src/freertos.c ****   ******************************************************************************
@@ -57,10 +58,10 @@ ARM GAS  C:\Users\Simon\AppData\Local\Temp\ccx3lgto.s 			page 1
   28:Core/Src/freertos.c **** 
   29:Core/Src/freertos.c **** /* USER CODE END Includes */
   30:Core/Src/freertos.c **** 
+ARM GAS  C:\Users\Simon\AppData\Local\Temp\cckNKhym.s 			page 2
+
+
   31:Core/Src/freertos.c **** /* Private typedef -----------------------------------------------------------*/
-ARM GAS  C:\Users\Simon\AppData\Local\Temp\ccx3lgto.s 			page 2
-
-
   32:Core/Src/freertos.c **** /* USER CODE BEGIN PTD */
   33:Core/Src/freertos.c **** 
   34:Core/Src/freertos.c **** /* USER CODE END PTD */
@@ -117,10 +118,10 @@ ARM GAS  C:\Users\Simon\AppData\Local\Temp\ccx3lgto.s 			page 1
   85:Core/Src/freertos.c **** /* USER CODE BEGIN 4 */
   86:Core/Src/freertos.c **** void vApplicationStackOverflowHook(xTaskHandle xTask, signed char *pcTaskName)
   87:Core/Src/freertos.c **** {
+ARM GAS  C:\Users\Simon\AppData\Local\Temp\cckNKhym.s 			page 3
+
+
   88:Core/Src/freertos.c ****    /* Run time stack overflow checking is performed if
-ARM GAS  C:\Users\Simon\AppData\Local\Temp\ccx3lgto.s 			page 3
-
-
   89:Core/Src/freertos.c ****    configCHECK_FOR_STACK_OVERFLOW is defined to 1 or 2. This hook function is
   90:Core/Src/freertos.c ****    called if a stack overflow is detected. */
   91:Core/Src/freertos.c **** }
@@ -175,200 +176,206 @@ ARM GAS  C:\Users\Simon\AppData\Local\Temp\ccx3lgto.s 			page 1
  140:Core/Src/freertos.c **** /* USER CODE END Header_StartDefaultTask */
  141:Core/Src/freertos.c **** void StartDefaultTask(void *argument)
  142:Core/Src/freertos.c **** {
-  28              		.loc 1 142 1 view -0
-  29              		.cfi_startproc
-  30              		@ Volatile: function does not return.
-ARM GAS  C:\Users\Simon\AppData\Local\Temp\ccx3lgto.s 			page 4
+  29              		.loc 1 142 1 view -0
+  30              		.cfi_startproc
+ARM GAS  C:\Users\Simon\AppData\Local\Temp\cckNKhym.s 			page 4
 
 
-  31              		@ args = 0, pretend = 0, frame = 0
-  32              		@ frame_needed = 0, uses_anonymous_args = 0
-  33              	.LVL0:
-  34              		.loc 1 142 1 is_stmt 0 view .LVU1
-  35 0000 08B5     		push	{r3, lr}
-  36              	.LCFI0:
-  37              		.cfi_def_cfa_offset 8
-  38              		.cfi_offset 3, -8
-  39              		.cfi_offset 14, -4
-  40              	.LVL1:
-  41              	.L2:
+  31              		@ Volatile: function does not return.
+  32              		@ args = 0, pretend = 0, frame = 0
+  33              		@ frame_needed = 0, uses_anonymous_args = 0
+  34              	.LVL0:
+  35              		.loc 1 142 1 is_stmt 0 view .LVU1
+  36 0000 08B5     		push	{r3, lr}
+  37              	.LCFI0:
+  38              		.cfi_def_cfa_offset 8
+  39              		.cfi_offset 3, -8
+  40              		.cfi_offset 14, -4
+  41              	.LVL1:
+  42              	.L2:
  143:Core/Src/freertos.c ****   /* USER CODE BEGIN StartDefaultTask */
  144:Core/Src/freertos.c ****   /* Infinite loop */
  145:Core/Src/freertos.c ****   for(;;)
-  42              		.loc 1 145 3 is_stmt 1 discriminator 1 view .LVU2
+  43              		.loc 1 145 3 is_stmt 1 discriminator 1 view .LVU2
  146:Core/Src/freertos.c ****   {
  147:Core/Src/freertos.c ****     osDelay(1);
-  43              		.loc 1 147 5 discriminator 1 view .LVU3
-  44 0002 0120     		movs	r0, #1
-  45 0004 FFF7FEFF 		bl	osDelay
-  46              	.LVL2:
+  44              		.loc 1 147 5 discriminator 1 view .LVU3
+  45 0002 0120     		movs	r0, #1
+  46 0004 FFF7FEFF 		bl	osDelay
+  47              	.LVL2:
  145:Core/Src/freertos.c ****   {
-  47              		.loc 1 145 3 discriminator 1 view .LVU4
-  48 0008 FBE7     		b	.L2
-  49              		.cfi_endproc
-  50              	.LFE152:
-  52              		.section	.text.configureTimerForRunTimeStats,"ax",%progbits
-  53              		.align	1
-  54              		.weak	configureTimerForRunTimeStats
-  55              		.syntax unified
-  56              		.thumb
-  57              		.thumb_func
-  59              	configureTimerForRunTimeStats:
-  60              	.LFB148:
+  48              		.loc 1 145 3 discriminator 1 view .LVU4
+  49 0008 FBE7     		b	.L2
+  50              		.cfi_endproc
+  51              	.LFE152:
+  53 000a 00BF     		.section	.text.configureTimerForRunTimeStats,"ax",%progbits
+  54              		.align	1
+  55              		.p2align 2,,3
+  56              		.weak	configureTimerForRunTimeStats
+  57              		.syntax unified
+  58              		.thumb
+  59              		.thumb_func
+  61              	configureTimerForRunTimeStats:
+  62              	.LFB148:
   75:Core/Src/freertos.c **** 
-  61              		.loc 1 75 1 view -0
-  62              		.cfi_startproc
-  63              		@ args = 0, pretend = 0, frame = 0
-  64              		@ frame_needed = 0, uses_anonymous_args = 0
-  65              		@ link register save eliminated.
+  63              		.loc 1 75 1 view -0
+  64              		.cfi_startproc
+  65              		@ args = 0, pretend = 0, frame = 0
+  66              		@ frame_needed = 0, uses_anonymous_args = 0
+  67              		@ link register save eliminated.
   77:Core/Src/freertos.c **** 
-  66              		.loc 1 77 1 view .LVU6
-  67 0000 7047     		bx	lr
-  68              		.cfi_endproc
-  69              	.LFE148:
-  71              		.section	.text.getRunTimeCounterValue,"ax",%progbits
-  72              		.align	1
-  73              		.weak	getRunTimeCounterValue
-  74              		.syntax unified
-  75              		.thumb
-  76              		.thumb_func
-  78              	getRunTimeCounterValue:
-  79              	.LFB149:
+  68              		.loc 1 77 1 view .LVU6
+  69 0000 7047     		bx	lr
+  70              		.cfi_endproc
+  71              	.LFE148:
+  73 0002 00BF     		.section	.text.getRunTimeCounterValue,"ax",%progbits
+  74              		.align	1
+  75              		.p2align 2,,3
+  76              		.weak	getRunTimeCounterValue
+  77              		.syntax unified
+  78              		.thumb
+  79              		.thumb_func
+  81              	getRunTimeCounterValue:
+  82              	.LFB149:
   80:Core/Src/freertos.c **** return 0;
-  80              		.loc 1 80 1 view -0
-  81              		.cfi_startproc
-  82              		@ args = 0, pretend = 0, frame = 0
-ARM GAS  C:\Users\Simon\AppData\Local\Temp\ccx3lgto.s 			page 5
+ARM GAS  C:\Users\Simon\AppData\Local\Temp\cckNKhym.s 			page 5
 
 
-  83              		@ frame_needed = 0, uses_anonymous_args = 0
-  84              		@ link register save eliminated.
+  83              		.loc 1 80 1 view -0
+  84              		.cfi_startproc
+  85              		@ args = 0, pretend = 0, frame = 0
+  86              		@ frame_needed = 0, uses_anonymous_args = 0
+  87              		@ link register save eliminated.
   81:Core/Src/freertos.c **** }
-  85              		.loc 1 81 1 view .LVU8
+  88              		.loc 1 81 1 view .LVU8
   82:Core/Src/freertos.c **** /* USER CODE END 1 */
-  86              		.loc 1 82 1 is_stmt 0 view .LVU9
-  87 0000 0020     		movs	r0, #0
-  88 0002 7047     		bx	lr
-  89              		.cfi_endproc
-  90              	.LFE149:
-  92              		.section	.text.vApplicationStackOverflowHook,"ax",%progbits
-  93              		.align	1
-  94              		.global	vApplicationStackOverflowHook
-  95              		.syntax unified
-  96              		.thumb
-  97              		.thumb_func
-  99              	vApplicationStackOverflowHook:
- 100              	.LVL3:
- 101              	.LFB150:
+  89              		.loc 1 82 1 is_stmt 0 view .LVU9
+  90 0000 0020     		movs	r0, #0
+  91 0002 7047     		bx	lr
+  92              		.cfi_endproc
+  93              	.LFE149:
+  95              		.section	.text.vApplicationStackOverflowHook,"ax",%progbits
+  96              		.align	1
+  97              		.p2align 2,,3
+  98              		.global	vApplicationStackOverflowHook
+  99              		.syntax unified
+ 100              		.thumb
+ 101              		.thumb_func
+ 103              	vApplicationStackOverflowHook:
+ 104              	.LVL3:
+ 105              	.LFB150:
   87:Core/Src/freertos.c ****    /* Run time stack overflow checking is performed if
- 102              		.loc 1 87 1 is_stmt 1 view -0
- 103              		.cfi_startproc
- 104              		@ args = 0, pretend = 0, frame = 0
- 105              		@ frame_needed = 0, uses_anonymous_args = 0
- 106              		@ link register save eliminated.
+ 106              		.loc 1 87 1 is_stmt 1 view -0
+ 107              		.cfi_startproc
+ 108              		@ args = 0, pretend = 0, frame = 0
+ 109              		@ frame_needed = 0, uses_anonymous_args = 0
+ 110              		@ link register save eliminated.
   91:Core/Src/freertos.c **** /* USER CODE END 4 */
- 107              		.loc 1 91 1 view .LVU11
- 108 0000 7047     		bx	lr
- 109              		.cfi_endproc
- 110              	.LFE150:
- 112              		.section	.text.MX_FREERTOS_Init,"ax",%progbits
- 113              		.align	1
- 114              		.global	MX_FREERTOS_Init
- 115              		.syntax unified
- 116              		.thumb
- 117              		.thumb_func
- 119              	MX_FREERTOS_Init:
- 120              	.LFB151:
+ 111              		.loc 1 91 1 view .LVU11
+ 112 0000 7047     		bx	lr
+ 113              		.cfi_endproc
+ 114              	.LFE150:
+ 116 0002 00BF     		.section	.text.MX_FREERTOS_Init,"ax",%progbits
+ 117              		.align	1
+ 118              		.p2align 2,,3
+ 119              		.global	MX_FREERTOS_Init
+ 120              		.syntax unified
+ 121              		.thumb
+ 122              		.thumb_func
+ 124              	MX_FREERTOS_Init:
+ 125              	.LFB151:
   99:Core/Src/freertos.c ****   /* USER CODE BEGIN Init */
- 121              		.loc 1 99 29 view -0
- 122              		.cfi_startproc
- 123              		@ args = 0, pretend = 0, frame = 0
- 124              		@ frame_needed = 0, uses_anonymous_args = 0
- 125 0000 08B5     		push	{r3, lr}
- 126              	.LCFI1:
- 127              		.cfi_def_cfa_offset 8
- 128              		.cfi_offset 3, -8
- 129              		.cfi_offset 14, -4
+ 126              		.loc 1 99 29 view -0
+ 127              		.cfi_startproc
+ 128              		@ args = 0, pretend = 0, frame = 0
+ 129              		@ frame_needed = 0, uses_anonymous_args = 0
  122:Core/Src/freertos.c **** 
  130              		.loc 1 122 3 view .LVU13
- 122:Core/Src/freertos.c **** 
- 131              		.loc 1 122 23 is_stmt 0 view .LVU14
- 132 0002 044A     		ldr	r2, .L9
- 133 0004 0021     		movs	r1, #0
- 134 0006 0448     		ldr	r0, .L9+4
- 135 0008 FFF7FEFF 		bl	osThreadNew
- 136              	.LVL4:
-ARM GAS  C:\Users\Simon\AppData\Local\Temp\ccx3lgto.s 			page 6
+  99:Core/Src/freertos.c ****   /* USER CODE BEGIN Init */
+ 131              		.loc 1 99 29 is_stmt 0 view .LVU14
+ 132 0000 08B5     		push	{r3, lr}
+ 133              	.LCFI1:
+ 134              		.cfi_def_cfa_offset 8
+ 135              		.cfi_offset 3, -8
+ 136              		.cfi_offset 14, -4
+ARM GAS  C:\Users\Simon\AppData\Local\Temp\cckNKhym.s 			page 6
 
 
  122:Core/Src/freertos.c **** 
- 137              		.loc 1 122 21 view .LVU15
- 138 000c 034B     		ldr	r3, .L9+8
- 139 000e 1860     		str	r0, [r3]
+ 137              		.loc 1 122 23 view .LVU15
+ 138 0002 044A     		ldr	r2, .L10
+ 139 0004 0021     		movs	r1, #0
+ 140 0006 0448     		ldr	r0, .L10+4
+ 141 0008 FFF7FEFF 		bl	osThreadNew
+ 142              	.LVL4:
+ 122:Core/Src/freertos.c **** 
+ 143              		.loc 1 122 21 view .LVU16
+ 144 000c 034B     		ldr	r3, .L10+8
+ 145 000e 1860     		str	r0, [r3]
  132:Core/Src/freertos.c **** 
- 140              		.loc 1 132 1 view .LVU16
- 141 0010 08BD     		pop	{r3, pc}
- 142              	.L10:
- 143 0012 00BF     		.align	2
- 144              	.L9:
- 145 0014 00000000 		.word	.LANCHOR0
- 146 0018 00000000 		.word	StartDefaultTask
- 147 001c 00000000 		.word	.LANCHOR1
- 148              		.cfi_endproc
- 149              	.LFE151:
- 151              		.global	defaultTask_attributes
- 152              		.section	.rodata.str1.4,"aMS",%progbits,1
- 153              		.align	2
- 154              	.LC0:
- 155 0000 64656661 		.ascii	"defaultTask\000"
- 155      756C7454 
- 155      61736B00 
- 156              		.global	defaultTaskHandle
- 157              		.section	.bss.defaultTaskHandle,"aw",%nobits
- 158              		.align	2
- 159              		.set	.LANCHOR1,. + 0
- 162              	defaultTaskHandle:
- 163 0000 00000000 		.space	4
- 164              		.section	.rodata.defaultTask_attributes,"a"
- 165              		.align	2
- 166              		.set	.LANCHOR0,. + 0
- 169              	defaultTask_attributes:
- 170 0000 00000000 		.word	.LC0
- 171 0004 00000000 		.space	16
- 171      00000000 
- 171      00000000 
- 171      00000000 
- 172 0014 00020000 		.word	512
- 173 0018 18000000 		.word	24
- 174 001c 00000000 		.space	8
- 174      00000000 
- 175              		.text
- 176              	.Letext0:
- 177              		.file 2 "c:\\program files (x86)\\arm gnu toolchain arm-none-eabi\\11.2 2022.02\\arm-none-eabi\\in
- 178              		.file 3 "c:\\program files (x86)\\arm gnu toolchain arm-none-eabi\\11.2 2022.02\\arm-none-eabi\\in
- 179              		.file 4 "Middlewares/Third_Party/FreeRTOS/Source/include/task.h"
- 180              		.file 5 "Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.h"
-ARM GAS  C:\Users\Simon\AppData\Local\Temp\ccx3lgto.s 			page 7
+ 146              		.loc 1 132 1 view .LVU17
+ 147 0010 08BD     		pop	{r3, pc}
+ 148              	.L11:
+ 149 0012 00BF     		.align	2
+ 150              	.L10:
+ 151 0014 00000000 		.word	.LANCHOR0
+ 152 0018 00000000 		.word	StartDefaultTask
+ 153 001c 00000000 		.word	.LANCHOR1
+ 154              		.cfi_endproc
+ 155              	.LFE151:
+ 157              		.global	defaultTask_attributes
+ 158              		.section	.rodata.str1.4,"aMS",%progbits,1
+ 159              		.align	2
+ 160              	.LC0:
+ 161 0000 64656661 		.ascii	"defaultTask\000"
+ 161      756C7454 
+ 161      61736B00 
+ 162              		.global	defaultTaskHandle
+ 163              		.section	.bss.defaultTaskHandle,"aw",%nobits
+ 164              		.align	2
+ 165              		.set	.LANCHOR1,. + 0
+ 168              	defaultTaskHandle:
+ 169 0000 00000000 		.space	4
+ 170              		.section	.rodata.defaultTask_attributes,"a"
+ 171              		.align	2
+ 172              		.set	.LANCHOR0,. + 0
+ 175              	defaultTask_attributes:
+ 176 0000 00000000 		.word	.LC0
+ 177 0004 00000000 		.space	16
+ 177      00000000 
+ 177      00000000 
+ 177      00000000 
+ 178 0014 00020000 		.word	512
+ 179 0018 18000000 		.word	24
+ 180 001c 00000000 		.space	8
+ 180      00000000 
+ 181              		.text
+ 182              	.Letext0:
+ 183              		.file 2 "c:\\program files (x86)\\arm gnu toolchain arm-none-eabi\\11.2 2022.02\\arm-none-eabi\\in
+ 184              		.file 3 "c:\\program files (x86)\\arm gnu toolchain arm-none-eabi\\11.2 2022.02\\arm-none-eabi\\in
+ 185              		.file 4 "Middlewares/Third_Party/FreeRTOS/Source/include/task.h"
+ 186              		.file 5 "Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.h"
+ARM GAS  C:\Users\Simon\AppData\Local\Temp\cckNKhym.s 			page 7
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 freertos.c
-C:\Users\Simon\AppData\Local\Temp\ccx3lgto.s:19     .text.StartDefaultTask:00000000 $t
-C:\Users\Simon\AppData\Local\Temp\ccx3lgto.s:25     .text.StartDefaultTask:00000000 StartDefaultTask
-C:\Users\Simon\AppData\Local\Temp\ccx3lgto.s:53     .text.configureTimerForRunTimeStats:00000000 $t
-C:\Users\Simon\AppData\Local\Temp\ccx3lgto.s:59     .text.configureTimerForRunTimeStats:00000000 configureTimerForRunTimeStats
-C:\Users\Simon\AppData\Local\Temp\ccx3lgto.s:72     .text.getRunTimeCounterValue:00000000 $t
-C:\Users\Simon\AppData\Local\Temp\ccx3lgto.s:78     .text.getRunTimeCounterValue:00000000 getRunTimeCounterValue
-C:\Users\Simon\AppData\Local\Temp\ccx3lgto.s:93     .text.vApplicationStackOverflowHook:00000000 $t
-C:\Users\Simon\AppData\Local\Temp\ccx3lgto.s:99     .text.vApplicationStackOverflowHook:00000000 vApplicationStackOverflowHook
-C:\Users\Simon\AppData\Local\Temp\ccx3lgto.s:113    .text.MX_FREERTOS_Init:00000000 $t
-C:\Users\Simon\AppData\Local\Temp\ccx3lgto.s:119    .text.MX_FREERTOS_Init:00000000 MX_FREERTOS_Init
-C:\Users\Simon\AppData\Local\Temp\ccx3lgto.s:145    .text.MX_FREERTOS_Init:00000014 $d
-C:\Users\Simon\AppData\Local\Temp\ccx3lgto.s:169    .rodata.defaultTask_attributes:00000000 defaultTask_attributes
-C:\Users\Simon\AppData\Local\Temp\ccx3lgto.s:153    .rodata.str1.4:00000000 $d
-C:\Users\Simon\AppData\Local\Temp\ccx3lgto.s:162    .bss.defaultTaskHandle:00000000 defaultTaskHandle
-C:\Users\Simon\AppData\Local\Temp\ccx3lgto.s:158    .bss.defaultTaskHandle:00000000 $d
-C:\Users\Simon\AppData\Local\Temp\ccx3lgto.s:165    .rodata.defaultTask_attributes:00000000 $d
+C:\Users\Simon\AppData\Local\Temp\cckNKhym.s:19     .text.StartDefaultTask:00000000 $t
+C:\Users\Simon\AppData\Local\Temp\cckNKhym.s:26     .text.StartDefaultTask:00000000 StartDefaultTask
+C:\Users\Simon\AppData\Local\Temp\cckNKhym.s:54     .text.configureTimerForRunTimeStats:00000000 $t
+C:\Users\Simon\AppData\Local\Temp\cckNKhym.s:61     .text.configureTimerForRunTimeStats:00000000 configureTimerForRunTimeStats
+C:\Users\Simon\AppData\Local\Temp\cckNKhym.s:74     .text.getRunTimeCounterValue:00000000 $t
+C:\Users\Simon\AppData\Local\Temp\cckNKhym.s:81     .text.getRunTimeCounterValue:00000000 getRunTimeCounterValue
+C:\Users\Simon\AppData\Local\Temp\cckNKhym.s:96     .text.vApplicationStackOverflowHook:00000000 $t
+C:\Users\Simon\AppData\Local\Temp\cckNKhym.s:103    .text.vApplicationStackOverflowHook:00000000 vApplicationStackOverflowHook
+C:\Users\Simon\AppData\Local\Temp\cckNKhym.s:117    .text.MX_FREERTOS_Init:00000000 $t
+C:\Users\Simon\AppData\Local\Temp\cckNKhym.s:124    .text.MX_FREERTOS_Init:00000000 MX_FREERTOS_Init
+C:\Users\Simon\AppData\Local\Temp\cckNKhym.s:151    .text.MX_FREERTOS_Init:00000014 $d
+C:\Users\Simon\AppData\Local\Temp\cckNKhym.s:175    .rodata.defaultTask_attributes:00000000 defaultTask_attributes
+C:\Users\Simon\AppData\Local\Temp\cckNKhym.s:159    .rodata.str1.4:00000000 $d
+C:\Users\Simon\AppData\Local\Temp\cckNKhym.s:168    .bss.defaultTaskHandle:00000000 defaultTaskHandle
+C:\Users\Simon\AppData\Local\Temp\cckNKhym.s:164    .bss.defaultTaskHandle:00000000 $d
+C:\Users\Simon\AppData\Local\Temp\cckNKhym.s:171    .rodata.defaultTask_attributes:00000000 $d
 
 UNDEFINED SYMBOLS
 osDelay

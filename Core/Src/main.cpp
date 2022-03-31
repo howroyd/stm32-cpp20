@@ -23,9 +23,9 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include <span>
-#include <iostream>
 #include <algorithm>
 #include <cstddef>
+#include <iostream>
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -86,6 +86,7 @@ void print(const auto& seq) {
     for (const auto& elem : seq) std::cout << elem << ' ';
     std::cout << '\n';
 }
+
 /* USER CODE END 0 */
 
 /**

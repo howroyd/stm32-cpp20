@@ -10,7 +10,7 @@ target: cpp20test
 # Can be C or C++
 language: C++
 
-optimization: Og
+optimization: O2
 
 # MCU settings
 targetMCU: stm32h7x
@@ -41,7 +41,9 @@ asDefinitionsFile:
 # Compiler flags
 cFlags: []
 cxxFlags: 
-  - -std=c++20
+  - -std=c++2a
+  - -fmodules-ts
+  - -MMD
 
 assemblyFlags: []
 linkerFlags: 

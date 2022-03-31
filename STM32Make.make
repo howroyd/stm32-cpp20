@@ -22,7 +22,7 @@ TARGET = cpp20test
 # debug build?
 DEBUG = 1
 # optimization
-OPT = -Og
+OPT = -O2
 
 
 #######################################
@@ -166,7 +166,7 @@ endif
 # Add additional flags
 CFLAGS += 
 ASFLAGS += 
-CXXFLAGS += -std=c++20 
+CXXFLAGS += -MMD -fmodules-ts -std=c++2a 
 
 # Generate dependency information
 CFLAGS += -MMD -MP -MF"$(@:%.o=%.d)"

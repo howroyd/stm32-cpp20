@@ -1,3 +1,4 @@
+## C, CXX and GCC stuff
 # Compiled Object files
 *.slo
 *.lo
@@ -26,3 +27,20 @@
 *.exe
 *.out
 *.app
+
+## Cmake stuff
+CMakeLists.txt.user
+CMakeCache.txt
+CMakeFiles
+CMakeScripts
+Testing
+#Makefile
+cmake_install.cmake
+install_manifest.txt
+compile_commands.json
+CTestTestfile.cmake
+_deps
+
+## Ninja stuff
+.ninja_deps
+.ninja_log

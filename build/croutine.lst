@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\Simon\AppData\Local\Temp\cc1mrjTm.s 			page 1
+ARM GAS  C:\Users\Simon\AppData\Local\Temp\ccfMDuob.s 			page 1
 
 
    1              		.cpu cortex-m7
@@ -11,21 +11,24 @@ ARM GAS  C:\Users\Simon\AppData\Local\Temp\cc1mrjTm.s 			page 1
    8              		.eabi_attribute 24, 1
    9              		.eabi_attribute 25, 1
   10              		.eabi_attribute 26, 1
-  11              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 30, 2
   12              		.eabi_attribute 34, 1
   13              		.eabi_attribute 18, 4
   14              		.file	"croutine.c"
   15              		.text
   16              	.Ltext0:
   17              		.cfi_sections	.debug_frame
-  18              		.section	.text.prvInitialiseCoRoutineLists,"ax",%progbits
+  18              		.section	.text.xCoRoutineCreate,"ax",%progbits
   19              		.align	1
-  20              		.syntax unified
-  21              		.thumb
-  22              		.thumb_func
-  24              	prvInitialiseCoRoutineLists:
-  25              	.LFB9:
-  26              		.file 1 "Middlewares/Third_Party/FreeRTOS/Source/croutine.c"
+  20              		.p2align 2,,3
+  21              		.global	xCoRoutineCreate
+  22              		.syntax unified
+  23              		.thumb
+  24              		.thumb_func
+  26              	xCoRoutineCreate:
+  27              	.LVL0:
+  28              	.LFB4:
+  29              		.file 1 "Middlewares/Third_Party/FreeRTOS/Source/croutine.c"
    1:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** /*
    2:Middlewares/Third_Party/FreeRTOS/Source/croutine.c ****  * FreeRTOS Kernel V10.3.1
    3:Middlewares/Third_Party/FreeRTOS/Source/croutine.c ****  * Copyright (C) 2020 Amazon.com, Inc. or its affiliates.  All Rights Reserved.
@@ -55,12 +58,12 @@ ARM GAS  C:\Users\Simon\AppData\Local\Temp\cc1mrjTm.s 			page 1
   27:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 
   28:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** #include "FreeRTOS.h"
   29:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** #include "task.h"
+ARM GAS  C:\Users\Simon\AppData\Local\Temp\ccfMDuob.s 			page 2
+
+
   30:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** #include "croutine.h"
   31:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 
   32:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** /* Remove the whole file is co-routines are not being used. */
-ARM GAS  C:\Users\Simon\AppData\Local\Temp\cc1mrjTm.s 			page 2
-
-
   33:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** #if( configUSE_CO_ROUTINES != 0 )
   34:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 
   35:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** /*
@@ -115,12 +118,12 @@ ARM GAS  C:\Users\Simon\AppData\Local\Temp\cc1mrjTm.s 			page 1
   84:Middlewares/Third_Party/FreeRTOS/Source/croutine.c ****  * the ready lists (there is no mutual exclusion).  Instead they are placed in
   85:Middlewares/Third_Party/FreeRTOS/Source/croutine.c ****  * in the pending ready list in order that they can later be moved to the ready
   86:Middlewares/Third_Party/FreeRTOS/Source/croutine.c ****  * list by the co-routine scheduler.
+ARM GAS  C:\Users\Simon\AppData\Local\Temp\ccfMDuob.s 			page 3
+
+
   87:Middlewares/Third_Party/FreeRTOS/Source/croutine.c ****  */
   88:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** static void prvCheckPendingReadyList( void );
   89:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 
-ARM GAS  C:\Users\Simon\AppData\Local\Temp\cc1mrjTm.s 			page 3
-
-
   90:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** /*
   91:Middlewares/Third_Party/FreeRTOS/Source/croutine.c ****  * Macro that looks at the list of co-routines that are currently delayed to
   92:Middlewares/Third_Party/FreeRTOS/Source/croutine.c ****  * see if any require waking.
@@ -135,16 +138,64 @@ ARM GAS  C:\Users\Simon\AppData\Local\Temp\cc1mrjTm.s 			page 1
  101:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 
  102:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** BaseType_t xCoRoutineCreate( crCOROUTINE_CODE pxCoRoutineCode, UBaseType_t uxPriority, UBaseType_t 
  103:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** {
+  30              		.loc 1 103 1 view -0
+  31              		.cfi_startproc
+  32              		@ args = 0, pretend = 0, frame = 0
+  33              		@ frame_needed = 0, uses_anonymous_args = 0
  104:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** BaseType_t xReturn;
+  34              		.loc 1 104 1 view .LVU1
  105:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** CRCB_t *pxCoRoutine;
+  35              		.loc 1 105 1 view .LVU2
  106:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 
  107:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 	/* Allocate the memory that will store the co-routine control block. */
  108:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 	pxCoRoutine = ( CRCB_t * ) pvPortMalloc( sizeof( CRCB_t ) );
+  36              		.loc 1 108 2 view .LVU3
+ 103:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** BaseType_t xReturn;
+  37              		.loc 1 103 1 is_stmt 0 view .LVU4
+  38 0000 2DE9F843 		push	{r3, r4, r5, r6, r7, r8, r9, lr}
+  39              	.LCFI0:
+  40              		.cfi_def_cfa_offset 32
+  41              		.cfi_offset 3, -32
+  42              		.cfi_offset 4, -28
+  43              		.cfi_offset 5, -24
+  44              		.cfi_offset 6, -20
+  45              		.cfi_offset 7, -16
+  46              		.cfi_offset 8, -12
+  47              		.cfi_offset 9, -8
+  48              		.cfi_offset 14, -4
+ 103:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** BaseType_t xReturn;
+  49              		.loc 1 103 1 view .LVU5
+  50 0004 0746     		mov	r7, r0
+  51              		.loc 1 108 29 view .LVU6
+  52 0006 3820     		movs	r0, #56
+  53              	.LVL1:
+ 103:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** BaseType_t xReturn;
+  54              		.loc 1 103 1 view .LVU7
+  55 0008 0D46     		mov	r5, r1
+  56 000a 1646     		mov	r6, r2
+  57              		.loc 1 108 29 view .LVU8
+  58 000c FFF7FEFF 		bl	pvPortMalloc
+  59              	.LVL2:
  109:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 	if( pxCoRoutine )
+  60              		.loc 1 109 2 is_stmt 1 view .LVU9
+ARM GAS  C:\Users\Simon\AppData\Local\Temp\ccfMDuob.s 			page 4
+
+
+  61              		.loc 1 109 4 is_stmt 0 view .LVU10
+  62 0010 58B3     		cbz	r0, .L5
  110:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 	{
  111:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 		/* If pxCurrentCoRoutine is NULL then this is the first co-routine to
  112:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 		be created and the co-routine data structures need initialising. */
  113:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 		if( pxCurrentCoRoutine == NULL )
+  63              		.loc 1 113 3 is_stmt 1 view .LVU11
+  64              		.loc 1 113 26 is_stmt 0 view .LVU12
+  65 0012 254B     		ldr	r3, .L9
+  66 0014 0446     		mov	r4, r0
+  67              		.loc 1 113 5 view .LVU13
+  68 0016 1A68     		ldr	r2, [r3]
+  69 0018 5AB3     		cbz	r2, .L8
+  70              	.LVL3:
+  71              	.L3:
  114:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 		{
  115:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 			pxCurrentCoRoutine = pxCoRoutine;
  116:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 			prvInitialiseCoRoutineLists();
@@ -152,15 +203,44 @@ ARM GAS  C:\Users\Simon\AppData\Local\Temp\cc1mrjTm.s 			page 1
  118:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 
  119:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 		/* Check the priority is within limits. */
  120:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 		if( uxPriority >= configMAX_CO_ROUTINE_PRIORITIES )
+  72              		.loc 1 120 3 is_stmt 1 view .LVU14
+  73 001a 012D     		cmp	r5, #1
  121:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 		{
  122:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 			uxPriority = configMAX_CO_ROUTINE_PRIORITIES - 1;
  123:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 		}
  124:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 
  125:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 		/* Fill out the co-routine control block from the function parameters. */
  126:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 		pxCoRoutine->uxState = corINITIAL_STATE;
+  74              		.loc 1 126 24 is_stmt 0 view .LVU15
+  75 001c 4FF00003 		mov	r3, #0
  127:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 		pxCoRoutine->uxPriority = uxPriority;
  128:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 		pxCoRoutine->uxIndex = uxIndex;
+  76              		.loc 1 128 24 view .LVU16
+  77 0020 2663     		str	r6, [r4, #48]
  129:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 		pxCoRoutine->pxCoRoutineFunction = pxCoRoutineCode;
+  78              		.loc 1 129 36 view .LVU17
+  79 0022 2646     		mov	r6, r4
+  80              	.LVL4:
+  81              		.loc 1 129 36 view .LVU18
+  82 0024 28BF     		it	cs
+  83 0026 0125     		movcs	r5, #1
+  84              	.LVL5:
+ 126:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 		pxCoRoutine->uxPriority = uxPriority;
+  85              		.loc 1 126 3 is_stmt 1 view .LVU19
+ 126:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 		pxCoRoutine->uxPriority = uxPriority;
+  86              		.loc 1 126 24 is_stmt 0 view .LVU20
+  87 0028 A386     		strh	r3, [r4, #52]	@ movhi
+ 127:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 		pxCoRoutine->uxPriority = uxPriority;
+  88              		.loc 1 127 3 is_stmt 1 view .LVU21
+ 127:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 		pxCoRoutine->uxPriority = uxPriority;
+  89              		.loc 1 127 27 is_stmt 0 view .LVU22
+  90 002a E562     		str	r5, [r4, #44]
+ 128:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 		pxCoRoutine->pxCoRoutineFunction = pxCoRoutineCode;
+  91              		.loc 1 128 3 is_stmt 1 view .LVU23
+  92              		.loc 1 129 3 view .LVU24
+ARM GAS  C:\Users\Simon\AppData\Local\Temp\ccfMDuob.s 			page 5
+
+
  130:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 
  131:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 		/* Initialise all the other co-routine control block parameters. */
  132:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 		vListInitialiseItem( &( pxCoRoutine->xGenericListItem ) );
@@ -174,15 +254,66 @@ ARM GAS  C:\Users\Simon\AppData\Local\Temp\cc1mrjTm.s 			page 1
  140:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 
  141:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 		/* Event lists are always in priority order. */
  142:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 		listSET_LIST_ITEM_VALUE( &( pxCoRoutine->xEventListItem ), ( ( TickType_t ) configMAX_CO_ROUTINE_
+  93              		.loc 1 142 3 is_stmt 0 view .LVU25
+  94 002c C5F10205 		rsb	r5, r5, #2
+  95              	.LVL6:
+ 129:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 
+  96              		.loc 1 129 36 view .LVU26
+  97 0030 46F8047B 		str	r7, [r6], #4
+  98              	.LVL7:
+ 132:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 		vListInitialiseItem( &( pxCoRoutine->xEventListItem ) );
+  99              		.loc 1 132 3 is_stmt 1 view .LVU27
+ 100 0034 3046     		mov	r0, r6
+ 101 0036 FFF7FEFF 		bl	vListInitialiseItem
+ 102              	.LVL8:
+ 133:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 
+ 103              		.loc 1 133 3 view .LVU28
+ 104 003a 04F11800 		add	r0, r4, #24
+ 105 003e FFF7FEFF 		bl	vListInitialiseItem
+ 106              	.LVL9:
+ 138:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 		listSET_LIST_ITEM_OWNER( &( pxCoRoutine->xEventListItem ), pxCoRoutine );
+ 107              		.loc 1 138 3 view .LVU29
  143:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 
  144:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 		/* Now the co-routine has been initialised it can be added to the ready
  145:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 		list at the correct priority. */
  146:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 		prvAddCoRoutineToReadyQueue( pxCoRoutine );
-ARM GAS  C:\Users\Simon\AppData\Local\Temp\cc1mrjTm.s 			page 4
+ 108              		.loc 1 146 3 is_stmt 0 view .LVU30
+ 109 0042 1A4B     		ldr	r3, .L9+4
+ 110 0044 E06A     		ldr	r0, [r4, #44]
+ 111 0046 3146     		mov	r1, r6
+ 112 0048 1A68     		ldr	r2, [r3]
+ 138:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 		listSET_LIST_ITEM_OWNER( &( pxCoRoutine->xEventListItem ), pxCoRoutine );
+ 113              		.loc 1 138 3 view .LVU31
+ 114 004a 2461     		str	r4, [r4, #16]
+ 139:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 
+ 115              		.loc 1 139 3 is_stmt 1 view .LVU32
+ 116              		.loc 1 146 3 is_stmt 0 view .LVU33
+ 117 004c 9042     		cmp	r0, r2
+ 139:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 
+ 118              		.loc 1 139 3 view .LVU34
+ 119 004e 6462     		str	r4, [r4, #36]
+ 142:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 
+ 120              		.loc 1 142 3 is_stmt 1 view .LVU35
+ 121 0050 A561     		str	r5, [r4, #24]
+ 122              		.loc 1 146 3 view .LVU36
+ 123              		.loc 1 146 3 view .LVU37
+ 124              		.loc 1 146 3 view .LVU38
+ARM GAS  C:\Users\Simon\AppData\Local\Temp\ccfMDuob.s 			page 6
 
 
+ 125 0052 88BF     		it	hi
+ 126 0054 1860     		strhi	r0, [r3]
+ 127 0056 00EB8000 		add	r0, r0, r0, lsl #2
+ 128 005a 154B     		ldr	r3, .L9+8
+ 129 005c 03EB8000 		add	r0, r3, r0, lsl #2
+ 130 0060 FFF7FEFF 		bl	vListInsertEnd
+ 131              	.LVL10:
+ 132              		.loc 1 146 45 view .LVU39
  147:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 
  148:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 		xReturn = pdPASS;
+ 133              		.loc 1 148 3 view .LVU40
+ 134              		.loc 1 148 11 is_stmt 0 view .LVU41
+ 135 0064 0120     		movs	r0, #1
  149:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 	}
  150:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 	else
  151:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 	{
@@ -191,6 +322,29 @@ ARM GAS  C:\Users\Simon\AppData\Local\Temp\cc1mrjTm.s 			page 1
  154:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 
  155:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 	return xReturn;
  156:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** }
+ 136              		.loc 1 156 1 view .LVU42
+ 137 0066 BDE8F883 		pop	{r3, r4, r5, r6, r7, r8, r9, pc}
+ 138              	.LVL11:
+ 139              	.L5:
+ 152:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 	}
+ 140              		.loc 1 152 11 view .LVU43
+ 141 006a 4FF0FF30 		mov	r0, #-1
+ 142              	.LVL12:
+ 155:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** }
+ 143              		.loc 1 155 2 is_stmt 1 view .LVU44
+ 144              		.loc 1 156 1 is_stmt 0 view .LVU45
+ 145 006e BDE8F883 		pop	{r3, r4, r5, r6, r7, r8, r9, pc}
+ 146              	.LVL13:
+ 147              	.L8:
+ 115:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 			prvInitialiseCoRoutineLists();
+ 148              		.loc 1 115 4 is_stmt 1 view .LVU46
+ 115:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 			prvInitialiseCoRoutineLists();
+ 149              		.loc 1 115 23 is_stmt 0 view .LVU47
+ 150 0072 1860     		str	r0, [r3]
+ 116:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 		}
+ 151              		.loc 1 116 4 is_stmt 1 view .LVU48
+ 152              	.LBB14:
+ 153              	.LBI14:
  157:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** /*-----------------------------------------------------------*/
  158:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 
  159:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** void vCoRoutineAddToDelayedList( TickType_t xTicksToDelay, List_t *pxEventList )
@@ -204,6 +358,9 @@ ARM GAS  C:\Users\Simon\AppData\Local\Temp\cc1mrjTm.s 			page 1
  167:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 	/* We must remove ourselves from the ready list before adding
  168:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 	ourselves to the blocked list as the same list item is used for
  169:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 	both lists. */
+ARM GAS  C:\Users\Simon\AppData\Local\Temp\ccfMDuob.s 			page 7
+
+
  170:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 	( void ) uxListRemove( ( ListItem_t * ) &( pxCurrentCoRoutine->xGenericListItem ) );
  171:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 
  172:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 	/* The list item will be inserted in wake time order. */
@@ -238,9 +395,6 @@ ARM GAS  C:\Users\Simon\AppData\Local\Temp\cc1mrjTm.s 			page 1
  201:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 	the	ready lists itself. */
  202:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 	while( listLIST_IS_EMPTY( &xPendingReadyCoRoutineList ) == pdFALSE )
  203:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 	{
-ARM GAS  C:\Users\Simon\AppData\Local\Temp\cc1mrjTm.s 			page 5
-
-
  204:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 		CRCB_t *pxUnblockedCRCB;
  205:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 
  206:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 		/* The pending ready list can be accessed by an ISR. */
@@ -264,6 +418,9 @@ ARM GAS  C:\Users\Simon\AppData\Local\Temp\cc1mrjTm.s 			page 1
  224:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 	xPassedTicks = xTaskGetTickCount() - xLastTickCount;
  225:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 	while( xPassedTicks )
  226:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 	{
+ARM GAS  C:\Users\Simon\AppData\Local\Temp\ccfMDuob.s 			page 8
+
+
  227:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 		xCoRoutineTickCount++;
  228:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 		xPassedTicks--;
  229:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 
@@ -298,9 +455,6 @@ ARM GAS  C:\Users\Simon\AppData\Local\Temp\cc1mrjTm.s 			page 1
  258:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 				line is still valid.  Also the pvContainer parameter will have
  259:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 				been set to NULL so the following lines are also valid. */
  260:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 				( void ) uxListRemove( &( pxCRCB->xGenericListItem ) );
-ARM GAS  C:\Users\Simon\AppData\Local\Temp\cc1mrjTm.s 			page 6
-
-
  261:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 
  262:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 				/* Is the co-routine waiting on an event also? */
  263:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 				if( pxCRCB->xEventListItem.pxContainer )
@@ -324,6 +478,9 @@ ARM GAS  C:\Users\Simon\AppData\Local\Temp\cc1mrjTm.s 			page 1
  281:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 	prvCheckPendingReadyList();
  282:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 
  283:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 	/* See if any delayed co-routines have timed out. */
+ARM GAS  C:\Users\Simon\AppData\Local\Temp\ccfMDuob.s 			page 9
+
+
  284:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 	prvCheckDelayedList();
  285:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 
  286:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 	/* Find the highest priority queue that contains ready co-routines. */
@@ -349,162 +506,313 @@ ARM GAS  C:\Users\Simon\AppData\Local\Temp\cc1mrjTm.s 			page 1
  306:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** /*-----------------------------------------------------------*/
  307:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 
  308:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** static void prvInitialiseCoRoutineLists( void )
+ 154              		.loc 1 308 13 view .LVU49
+ 155              	.LBB15:
  309:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** {
-  27              		.loc 1 309 1 view -0
-  28              		.cfi_startproc
-  29              		@ args = 0, pretend = 0, frame = 0
-  30              		@ frame_needed = 0, uses_anonymous_args = 0
-  31 0000 38B5     		push	{r3, r4, r5, lr}
-  32              	.LCFI0:
-  33              		.cfi_def_cfa_offset 16
-  34              		.cfi_offset 3, -16
-ARM GAS  C:\Users\Simon\AppData\Local\Temp\cc1mrjTm.s 			page 7
-
-
-  35              		.cfi_offset 4, -12
-  36              		.cfi_offset 5, -8
-  37              		.cfi_offset 14, -4
  310:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** UBaseType_t uxPriority;
-  38              		.loc 1 310 1 view .LVU1
+ 156              		.loc 1 310 1 view .LVU50
  311:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 
  312:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 	for( uxPriority = 0; uxPriority < configMAX_CO_ROUTINE_PRIORITIES; uxPriority++ )
-  39              		.loc 1 312 2 view .LVU2
-  40              	.LVL0:
-  41              		.loc 1 312 18 is_stmt 0 view .LVU3
-  42 0002 0024     		movs	r4, #0
-  43              		.loc 1 312 2 view .LVU4
-  44 0004 07E0     		b	.L2
-  45              	.LVL1:
-  46              	.L3:
+ 157              		.loc 1 312 2 view .LVU51
+ 158              	.LVL14:
+ 159              		.loc 1 312 34 view .LVU52
  313:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 	{
  314:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 		vListInitialise( ( List_t * ) &( pxReadyCoRoutineLists[ uxPriority ] ) );
-  47              		.loc 1 314 3 is_stmt 1 discriminator 3 view .LVU5
-  48 0006 04EB8402 		add	r2, r4, r4, lsl #2
-  49 000a 9300     		lsls	r3, r2, #2
-  50 000c 0B48     		ldr	r0, .L5
-  51 000e 1844     		add	r0, r0, r3
-  52 0010 FFF7FEFF 		bl	vListInitialise
-  53              	.LVL2:
- 312:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 	{
-  54              		.loc 1 312 79 discriminator 3 view .LVU6
-  55 0014 0134     		adds	r4, r4, #1
-  56              	.LVL3:
-  57              	.L2:
- 312:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 	{
-  58              		.loc 1 312 34 discriminator 1 view .LVU7
-  59 0016 012C     		cmp	r4, #1
-  60 0018 F5D9     		bls	.L3
+ 160              		.loc 1 314 3 view .LVU53
  315:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 	}
  316:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 
  317:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 	vListInitialise( ( List_t * ) &xDelayedCoRoutineList1 );
-  61              		.loc 1 317 2 view .LVU8
-  62 001a 094D     		ldr	r5, .L5+4
-  63 001c 2846     		mov	r0, r5
-  64 001e FFF7FEFF 		bl	vListInitialise
-  65              	.LVL4:
+ 161              		.loc 1 317 2 is_stmt 0 view .LVU54
+ 162 0074 DFF84C90 		ldr	r9, .L9+28
+ 314:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 	}
+ 163              		.loc 1 314 3 view .LVU55
+ 164 0078 0D48     		ldr	r0, .L9+8
+ 165              	.LVL15:
+ 314:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 	}
+ 166              		.loc 1 314 3 view .LVU56
+ 167 007a FFF7FEFF 		bl	vListInitialise
+ 168              	.LVL16:
+ 312:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 	{
+ 169              		.loc 1 312 79 is_stmt 1 view .LVU57
+ 312:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 	{
+ 170              		.loc 1 312 34 view .LVU58
+ 314:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 	}
+ 171              		.loc 1 314 3 view .LVU59
+ARM GAS  C:\Users\Simon\AppData\Local\Temp\ccfMDuob.s 			page 10
+
+
  318:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 	vListInitialise( ( List_t * ) &xDelayedCoRoutineList2 );
-  66              		.loc 1 318 2 view .LVU9
-  67 0022 084C     		ldr	r4, .L5+8
-  68              	.LVL5:
-  69              		.loc 1 318 2 is_stmt 0 view .LVU10
-  70 0024 2046     		mov	r0, r4
-  71 0026 FFF7FEFF 		bl	vListInitialise
-  72              	.LVL6:
+ 172              		.loc 1 318 2 is_stmt 0 view .LVU60
+ 173 007e DFF84880 		ldr	r8, .L9+32
+ 314:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 	}
+ 174              		.loc 1 314 3 view .LVU61
+ 175 0082 0C48     		ldr	r0, .L9+12
+ 176 0084 FFF7FEFF 		bl	vListInitialise
+ 177              	.LVL17:
+ 312:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 	{
+ 178              		.loc 1 312 79 is_stmt 1 view .LVU62
+ 312:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 	{
+ 179              		.loc 1 312 34 view .LVU63
+ 317:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 	vListInitialise( ( List_t * ) &xDelayedCoRoutineList2 );
+ 180              		.loc 1 317 2 view .LVU64
+ 181 0088 4846     		mov	r0, r9
+ 182 008a FFF7FEFF 		bl	vListInitialise
+ 183              	.LVL18:
+ 184              		.loc 1 318 2 view .LVU65
+ 185 008e 4046     		mov	r0, r8
+ 186 0090 FFF7FEFF 		bl	vListInitialise
+ 187              	.LVL19:
  319:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 	vListInitialise( ( List_t * ) &xPendingReadyCoRoutineList );
-  73              		.loc 1 319 2 is_stmt 1 view .LVU11
-  74 002a 0748     		ldr	r0, .L5+12
-  75 002c FFF7FEFF 		bl	vListInitialise
-  76              	.LVL7:
+ 188              		.loc 1 319 2 view .LVU66
+ 189 0094 0848     		ldr	r0, .L9+16
+ 190 0096 FFF7FEFF 		bl	vListInitialise
+ 191              	.LVL20:
  320:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 
  321:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 	/* Start with pxDelayedCoRoutineList using list1 and the
  322:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 	pxOverflowDelayedCoRoutineList using list2. */
-ARM GAS  C:\Users\Simon\AppData\Local\Temp\cc1mrjTm.s 			page 8
-
-
  323:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 	pxDelayedCoRoutineList = &xDelayedCoRoutineList1;
-  77              		.loc 1 323 2 view .LVU12
-  78              		.loc 1 323 25 is_stmt 0 view .LVU13
-  79 0030 064B     		ldr	r3, .L5+16
-  80 0032 1D60     		str	r5, [r3]
+ 192              		.loc 1 323 2 view .LVU67
+ 193              		.loc 1 323 25 is_stmt 0 view .LVU68
+ 194 009a 084B     		ldr	r3, .L9+20
+ 195 009c C3F80090 		str	r9, [r3]
  324:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 	pxOverflowDelayedCoRoutineList = &xDelayedCoRoutineList2;
-  81              		.loc 1 324 2 is_stmt 1 view .LVU14
-  82              		.loc 1 324 33 is_stmt 0 view .LVU15
-  83 0034 064B     		ldr	r3, .L5+20
-  84 0036 1C60     		str	r4, [r3]
+ 196              		.loc 1 324 2 is_stmt 1 view .LVU69
+ 197              		.loc 1 324 33 is_stmt 0 view .LVU70
+ 198 00a0 074B     		ldr	r3, .L9+24
+ 199 00a2 C3F80080 		str	r8, [r3]
  325:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** }
-  85              		.loc 1 325 1 view .LVU16
-  86 0038 38BD     		pop	{r3, r4, r5, pc}
-  87              	.L6:
-  88 003a 00BF     		.align	2
-  89              	.L5:
-  90 003c 00000000 		.word	.LANCHOR0
-  91 0040 00000000 		.word	.LANCHOR1
-  92 0044 00000000 		.word	.LANCHOR2
-  93 0048 00000000 		.word	.LANCHOR3
-  94 004c 00000000 		.word	.LANCHOR4
-  95 0050 00000000 		.word	.LANCHOR5
-  96              		.cfi_endproc
-  97              	.LFE9:
-  99              		.section	.text.prvCheckPendingReadyList,"ax",%progbits
- 100              		.align	1
- 101              		.syntax unified
- 102              		.thumb
- 103              		.thumb_func
- 105              	prvCheckPendingReadyList:
- 106              	.LFB6:
- 198:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 	/* Are there any co-routines waiting to get moved to the ready list?  These
- 107              		.loc 1 198 1 is_stmt 1 view -0
- 108              		.cfi_startproc
- 109              		@ args = 0, pretend = 0, frame = 0
- 110              		@ frame_needed = 0, uses_anonymous_args = 0
- 111 0000 38B5     		push	{r3, r4, r5, lr}
- 112              	.LCFI1:
- 113              		.cfi_def_cfa_offset 16
- 114              		.cfi_offset 3, -16
- 115              		.cfi_offset 4, -12
- 116              		.cfi_offset 5, -8
- 117              		.cfi_offset 14, -4
- 202:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 	{
- 118              		.loc 1 202 2 view .LVU18
- 202:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 	{
- 119              		.loc 1 202 7 is_stmt 0 view .LVU19
- 120 0002 07E0     		b	.L8
- 121              	.LVL8:
- 122              	.L9:
- 123              	.LBB12:
- 215:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 	}
- 124              		.loc 1 215 3 is_stmt 1 discriminator 3 view .LVU20
- 125 0004 03EB8303 		add	r3, r3, r3, lsl #2
- 126 0008 9A00     		lsls	r2, r3, #2
- 127 000a 2946     		mov	r1, r5
- 128 000c 1248     		ldr	r0, .L13
-ARM GAS  C:\Users\Simon\AppData\Local\Temp\cc1mrjTm.s 			page 9
+ 200              		.loc 1 325 1 view .LVU71
+ 201 00a6 B8E7     		b	.L3
+ 202              	.L10:
+ 203              		.align	2
+ 204              	.L9:
+ 205 00a8 00000000 		.word	.LANCHOR0
+ 206 00ac 00000000 		.word	.LANCHOR7
+ 207 00b0 00000000 		.word	.LANCHOR1
+ 208 00b4 14000000 		.word	.LANCHOR1+20
+ 209 00b8 00000000 		.word	.LANCHOR4
+ 210 00bc 00000000 		.word	.LANCHOR5
+ 211 00c0 00000000 		.word	.LANCHOR6
+ 212 00c4 00000000 		.word	.LANCHOR2
+ 213 00c8 00000000 		.word	.LANCHOR3
+ 214              	.LBE15:
+ 215              	.LBE14:
+ 216              		.cfi_endproc
+ARM GAS  C:\Users\Simon\AppData\Local\Temp\ccfMDuob.s 			page 11
 
 
- 129 000e 1044     		add	r0, r0, r2
- 130 0010 FFF7FEFF 		bl	vListInsertEnd
- 131              	.LVL9:
- 132              	.L8:
+ 217              	.LFE4:
+ 219              		.section	.text.vCoRoutineAddToDelayedList,"ax",%progbits
+ 220              		.align	1
+ 221              		.p2align 2,,3
+ 222              		.global	vCoRoutineAddToDelayedList
+ 223              		.syntax unified
+ 224              		.thumb
+ 225              		.thumb_func
+ 227              	vCoRoutineAddToDelayedList:
+ 228              	.LVL21:
+ 229              	.LFB5:
+ 160:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** TickType_t xTimeToWake;
+ 230              		.loc 1 160 1 is_stmt 1 view -0
+ 231              		.cfi_startproc
+ 232              		@ args = 0, pretend = 0, frame = 0
+ 233              		@ frame_needed = 0, uses_anonymous_args = 0
+ 161:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 
+ 234              		.loc 1 161 1 view .LVU73
+ 165:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 
+ 235              		.loc 1 165 2 view .LVU74
+ 160:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** TickType_t xTimeToWake;
+ 236              		.loc 1 160 1 is_stmt 0 view .LVU75
+ 237 0000 F8B5     		push	{r3, r4, r5, r6, r7, lr}
+ 238              	.LCFI1:
+ 239              		.cfi_def_cfa_offset 24
+ 240              		.cfi_offset 3, -24
+ 241              		.cfi_offset 4, -20
+ 242              		.cfi_offset 5, -16
+ 243              		.cfi_offset 6, -12
+ 244              		.cfi_offset 7, -8
+ 245              		.cfi_offset 14, -4
+ 165:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 
+ 246              		.loc 1 165 36 view .LVU76
+ 247 0002 0F4F     		ldr	r7, .L16
+ 160:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** TickType_t xTimeToWake;
+ 248              		.loc 1 160 1 view .LVU77
+ 249 0004 0D46     		mov	r5, r1
+ 170:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 
+ 250              		.loc 1 170 63 view .LVU78
+ 251 0006 0F4E     		ldr	r6, .L16+4
+ 165:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 
+ 252              		.loc 1 165 14 view .LVU79
+ 253 0008 3B68     		ldr	r3, [r7]
+ 254 000a C418     		adds	r4, r0, r3
+ 255              	.LVL22:
+ 170:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 
+ 256              		.loc 1 170 2 is_stmt 1 view .LVU80
+ 170:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 
+ 257              		.loc 1 170 11 is_stmt 0 view .LVU81
+ 258 000c 3068     		ldr	r0, [r6]
+ 259              	.LVL23:
+ 170:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 
+ 260              		.loc 1 170 11 view .LVU82
+ 261 000e 0430     		adds	r0, r0, #4
+ 262 0010 FFF7FEFF 		bl	uxListRemove
+ 263              	.LVL24:
+ 173:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 
+ARM GAS  C:\Users\Simon\AppData\Local\Temp\ccfMDuob.s 			page 12
+
+
+ 264              		.loc 1 173 2 is_stmt 1 view .LVU83
+ 175:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 	{
+ 265              		.loc 1 175 4 is_stmt 0 view .LVU84
+ 266 0014 3B68     		ldr	r3, [r7]
+ 173:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 
+ 267              		.loc 1 173 2 view .LVU85
+ 268 0016 3168     		ldr	r1, [r6]
+ 175:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 	{
+ 269              		.loc 1 175 4 view .LVU86
+ 270 0018 A342     		cmp	r3, r4
+ 173:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 
+ 271              		.loc 1 173 2 view .LVU87
+ 272 001a 4C60     		str	r4, [r1, #4]
+ 175:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 	{
+ 273              		.loc 1 175 2 is_stmt 1 view .LVU88
+ 179:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 	}
+ 274              		.loc 1 179 3 view .LVU89
+ 185:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 	}
+ 275              		.loc 1 185 3 view .LVU90
+ 276 001c 01F10401 		add	r1, r1, #4
+ 179:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 	}
+ 277              		.loc 1 179 3 is_stmt 0 view .LVU91
+ 278 0020 8CBF     		ite	hi
+ 279 0022 094B     		ldrhi	r3, .L16+8
+ 185:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 	}
+ 280              		.loc 1 185 3 view .LVU92
+ 281 0024 094B     		ldrls	r3, .L16+12
+ 282 0026 1868     		ldr	r0, [r3]
+ 283 0028 FFF7FEFF 		bl	vListInsert
+ 284              	.LVL25:
+ 188:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 	{
+ 285              		.loc 1 188 2 is_stmt 1 view .LVU93
+ 188:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 	{
+ 286              		.loc 1 188 4 is_stmt 0 view .LVU94
+ 287 002c 35B1     		cbz	r5, .L11
+ 192:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 	}
+ 288              		.loc 1 192 3 is_stmt 1 view .LVU95
+ 289 002e 3168     		ldr	r1, [r6]
+ 290 0030 2846     		mov	r0, r5
+ 291 0032 1831     		adds	r1, r1, #24
+ 194:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** /*-----------------------------------------------------------*/
+ 292              		.loc 1 194 1 is_stmt 0 view .LVU96
+ 293 0034 BDE8F840 		pop	{r3, r4, r5, r6, r7, lr}
+ 294              	.LCFI2:
+ 295              		.cfi_remember_state
+ 296              		.cfi_restore 14
+ 297              		.cfi_restore 7
+ 298              		.cfi_restore 6
+ 299              		.cfi_restore 5
+ 300              		.cfi_restore 4
+ 301              		.cfi_restore 3
+ 302              		.cfi_def_cfa_offset 0
+ 303              	.LVL26:
+ 192:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 	}
+ 304              		.loc 1 192 3 view .LVU97
+ 305 0038 FFF7FEBF 		b	vListInsert
+ 306              	.LVL27:
+ARM GAS  C:\Users\Simon\AppData\Local\Temp\ccfMDuob.s 			page 13
+
+
+ 307              	.L11:
+ 308              	.LCFI3:
+ 309              		.cfi_restore_state
+ 194:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** /*-----------------------------------------------------------*/
+ 310              		.loc 1 194 1 view .LVU98
+ 311 003c F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 312              	.LVL28:
+ 313              	.L17:
+ 194:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** /*-----------------------------------------------------------*/
+ 314              		.loc 1 194 1 view .LVU99
+ 315 003e 00BF     		.align	2
+ 316              	.L16:
+ 317 0040 00000000 		.word	.LANCHOR8
+ 318 0044 00000000 		.word	.LANCHOR0
+ 319 0048 00000000 		.word	.LANCHOR6
+ 320 004c 00000000 		.word	.LANCHOR5
+ 321              		.cfi_endproc
+ 322              	.LFE5:
+ 324              		.section	.text.vCoRoutineSchedule,"ax",%progbits
+ 325              		.align	1
+ 326              		.p2align 2,,3
+ 327              		.global	vCoRoutineSchedule
+ 328              		.syntax unified
+ 329              		.thumb
+ 330              		.thumb_func
+ 332              	vCoRoutineSchedule:
+ 333              	.LFB8:
+ 279:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 	/* See if any co-routines readied by events need moving to the ready lists. */
+ 334              		.loc 1 279 1 is_stmt 1 view -0
+ 335              		.cfi_startproc
+ 336              		@ args = 0, pretend = 0, frame = 8
+ 337              		@ frame_needed = 0, uses_anonymous_args = 0
+ 281:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 
+ 338              		.loc 1 281 2 view .LVU101
+ 339              	.LBB31:
+ 340              	.LBI31:
+ 197:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** {
+ 341              		.loc 1 197 13 view .LVU102
+ 342              	.LBB32:
+ 202:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 	{
+ 343              		.loc 1 202 2 view .LVU103
+ 344              	.LBB33:
  215:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 	}
- 133              		.loc 1 215 49 discriminator 4 view .LVU21
- 134              	.LBE12:
+ 345              		.loc 1 215 49 view .LVU104
+ 346              	.LBE33:
  202:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 	{
- 135              		.loc 1 202 58 discriminator 4 view .LVU22
+ 347              		.loc 1 202 58 view .LVU105
+ 348              	.LBE32:
+ 349              	.LBE31:
+ 279:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 	/* See if any co-routines readied by events need moving to the ready lists. */
+ 350              		.loc 1 279 1 is_stmt 0 view .LVU106
+ 351 0000 2DE9F04F 		push	{r4, r5, r6, r7, r8, r9, r10, fp, lr}
+ 352              	.LCFI4:
+ 353              		.cfi_def_cfa_offset 36
+ 354              		.cfi_offset 4, -36
+ 355              		.cfi_offset 5, -32
+ 356              		.cfi_offset 6, -28
+ARM GAS  C:\Users\Simon\AppData\Local\Temp\ccfMDuob.s 			page 14
+
+
+ 357              		.cfi_offset 7, -24
+ 358              		.cfi_offset 8, -20
+ 359              		.cfi_offset 9, -16
+ 360              		.cfi_offset 10, -12
+ 361              		.cfi_offset 11, -8
+ 362              		.cfi_offset 14, -4
+ 363              	.LBB43:
+ 364              	.LBB41:
  202:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 	{
- 136              		.loc 1 202 9 is_stmt 0 discriminator 4 view .LVU23
- 137 0014 114B     		ldr	r3, .L13+4
- 138 0016 1B68     		ldr	r3, [r3]
+ 365              		.loc 1 202 9 view .LVU107
+ 366 0004 5F4F     		ldr	r7, .L58
+ 367              	.LBE41:
+ 368              	.LBE43:
+ 279:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 	/* See if any co-routines readied by events need moving to the ready lists. */
+ 369              		.loc 1 279 1 view .LVU108
+ 370 0006 83B0     		sub	sp, sp, #12
+ 371              	.LCFI5:
+ 372              		.cfi_def_cfa_offset 48
+ 373 0008 5F4C     		ldr	r4, .L58+4
+ 374              	.LBB44:
+ 375              	.LBB42:
  202:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 	{
- 139              		.loc 1 202 58 discriminator 4 view .LVU24
- 140 0018 EBB1     		cbz	r3, .L12
- 141              	.LBB17:
- 204:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 
- 142              		.loc 1 204 3 is_stmt 1 view .LVU25
- 207:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 		{
- 143              		.loc 1 207 3 view .LVU26
- 144              	.LBB13:
- 145              	.LBI13:
- 146              		.file 2 "Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/portmacro.h"
+ 376              		.loc 1 202 9 view .LVU109
+ 377 000a 3B68     		ldr	r3, [r7]
+ 378 000c 5F4D     		ldr	r5, .L58+8
+ 202:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 	{
+ 379              		.loc 1 202 58 view .LVU110
+ 380 000e 2BB3     		cbz	r3, .L23
+ 381              	.LBB40:
+ 382              	.LBB34:
+ 383              	.LBB35:
+ 384              		.file 2 "Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/portmacro.h"
    1:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/portmacro.h **** /*
    2:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/portmacro.h ****  * FreeRTOS Kernel V10.3.1
    3:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/portmacro.h ****  * Copyright (C) 2020 Amazon.com, Inc. or its affiliates.  All Rights Reserved.
@@ -530,6 +838,9 @@ ARM GAS  C:\Users\Simon\AppData\Local\Temp\cc1mrjTm.s 			page 1
   23:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/portmacro.h ****  * http://aws.amazon.com/freertos
   24:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/portmacro.h ****  *
   25:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/portmacro.h ****  * 1 tab == 4 spaces!
+ARM GAS  C:\Users\Simon\AppData\Local\Temp\ccfMDuob.s 			page 15
+
+
   26:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/portmacro.h ****  */
   27:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/portmacro.h **** 
   28:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/portmacro.h **** 
@@ -538,9 +849,6 @@ ARM GAS  C:\Users\Simon\AppData\Local\Temp\cc1mrjTm.s 			page 1
   31:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/portmacro.h **** 
   32:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/portmacro.h **** #ifdef __cplusplus
   33:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/portmacro.h **** extern "C" {
-ARM GAS  C:\Users\Simon\AppData\Local\Temp\cc1mrjTm.s 			page 10
-
-
   34:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/portmacro.h **** #endif
   35:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/portmacro.h **** 
   36:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/portmacro.h **** /*-----------------------------------------------------------
@@ -590,6 +898,9 @@ ARM GAS  C:\Users\Simon\AppData\Local\Temp\cc1mrjTm.s 			page 1
   80:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/portmacro.h **** {																				\
   81:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/portmacro.h **** 	/* Set a PendSV to request a context switch. */								\
   82:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/portmacro.h **** 	portNVIC_INT_CTRL_REG = portNVIC_PENDSVSET_BIT;								\
+ARM GAS  C:\Users\Simon\AppData\Local\Temp\ccfMDuob.s 			page 16
+
+
   83:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/portmacro.h **** 																				\
   84:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/portmacro.h **** 	/* Barriers are normally not required but do ensure the code is completely	\
   85:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/portmacro.h **** 	within the specified behaviour for the architecture. */						\
@@ -598,9 +909,6 @@ ARM GAS  C:\Users\Simon\AppData\Local\Temp\cc1mrjTm.s 			page 1
   88:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/portmacro.h **** }
   89:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/portmacro.h **** 
   90:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/portmacro.h **** #define portNVIC_INT_CTRL_REG		( * ( ( volatile uint32_t * ) 0xe000ed04 ) )
-ARM GAS  C:\Users\Simon\AppData\Local\Temp\cc1mrjTm.s 			page 11
-
-
   91:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/portmacro.h **** #define portNVIC_PENDSVSET_BIT		( 1UL << 28UL )
   92:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/portmacro.h **** #define portEND_SWITCHING_ISR( xSwitchRequired ) if( xSwitchRequired != pdFALSE ) portYIELD()
   93:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/portmacro.h **** #define portYIELD_FROM_ISR( x ) portEND_SWITCHING_ISR( x )
@@ -650,6 +958,9 @@ ARM GAS  C:\Users\Simon\AppData\Local\Temp\cc1mrjTm.s 			page 1
  137:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/portmacro.h **** 
  138:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/portmacro.h **** 	/* Check the configuration. */
  139:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/portmacro.h **** 	#if( configMAX_PRIORITIES > 32 )
+ARM GAS  C:\Users\Simon\AppData\Local\Temp\ccfMDuob.s 			page 17
+
+
  140:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/portmacro.h **** 		#error configUSE_PORT_OPTIMISED_TASK_SELECTION can only be set to 1 when configMAX_PRIORITIES is 
  141:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/portmacro.h **** 	#endif
  142:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/portmacro.h **** 
@@ -658,9 +969,6 @@ ARM GAS  C:\Users\Simon\AppData\Local\Temp\cc1mrjTm.s 			page 1
  145:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/portmacro.h **** 	#define portRESET_READY_PRIORITY( uxPriority, uxReadyPriorities ) ( uxReadyPriorities ) &= ~( 1UL 
  146:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/portmacro.h **** 
  147:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/portmacro.h **** 	/*-----------------------------------------------------------*/
-ARM GAS  C:\Users\Simon\AppData\Local\Temp\cc1mrjTm.s 			page 12
-
-
  148:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/portmacro.h **** 
  149:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/portmacro.h **** 	#define portGET_HIGHEST_PRIORITY( uxTopPriority, uxReadyPriorities ) uxTopPriority = ( 31UL - ( ui
  150:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/portmacro.h **** 
@@ -705,51 +1013,14 @@ ARM GAS  C:\Users\Simon\AppData\Local\Temp\cc1mrjTm.s 			page 1
  189:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/portmacro.h **** /*-----------------------------------------------------------*/
  190:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/portmacro.h **** 
  191:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/portmacro.h **** portFORCE_INLINE static void vPortRaiseBASEPRI( void )
- 147              		.loc 2 191 30 view .LVU27
- 148              	.LBB14:
  192:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/portmacro.h **** {
  193:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/portmacro.h **** uint32_t ulNewBASEPRI;
- 149              		.loc 2 193 1 view .LVU28
  194:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/portmacro.h **** 
  195:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/portmacro.h **** 	__asm volatile
- 150              		.loc 2 195 2 view .LVU29
- 151              		.syntax unified
- 152              	@ 195 "Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/portmacro.h" 1
- 153 001a 4FF05003 			mov r3, #80												
- 154 001e 83F31188 		msr basepri, r3											
- 155 0022 BFF36F8F 		isb														
-ARM GAS  C:\Users\Simon\AppData\Local\Temp\cc1mrjTm.s 			page 13
-
-
- 156 0026 BFF34F8F 		dsb														
- 157              	
- 158              	@ 0 "" 2
- 159              		.thumb
- 160              		.syntax unified
- 161              	.LBE14:
- 162              	.LBE13:
- 209:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 			( void ) uxListRemove( &( pxUnblockedCRCB->xEventListItem ) );
- 163              		.loc 1 209 4 view .LVU30
- 209:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 			( void ) uxListRemove( &( pxUnblockedCRCB->xEventListItem ) );
- 164              		.loc 1 209 35 is_stmt 0 view .LVU31
- 165 002a 0C4B     		ldr	r3, .L13+4
- 166 002c DB68     		ldr	r3, [r3, #12]
- 209:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 			( void ) uxListRemove( &( pxUnblockedCRCB->xEventListItem ) );
- 167              		.loc 1 209 20 view .LVU32
- 168 002e DC68     		ldr	r4, [r3, #12]
- 169              	.LVL10:
- 210:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 		}
- 170              		.loc 1 210 4 is_stmt 1 view .LVU33
- 210:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 		}
- 171              		.loc 1 210 13 is_stmt 0 view .LVU34
- 172 0030 04F11800 		add	r0, r4, #24
- 173 0034 FFF7FEFF 		bl	uxListRemove
- 174              	.LVL11:
- 212:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 
- 175              		.loc 1 212 3 is_stmt 1 view .LVU35
- 176              	.LBB15:
- 177              	.LBI15:
  196:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/portmacro.h **** 	(
+ARM GAS  C:\Users\Simon\AppData\Local\Temp\ccfMDuob.s 			page 18
+
+
  197:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/portmacro.h **** 		"	mov %0, %1												\n"	\
  198:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/portmacro.h **** 		"	msr basepri, %0											\n" \
  199:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/portmacro.h **** 		"	isb														\n" \
@@ -778,838 +1049,658 @@ ARM GAS  C:\Users\Simon\AppData\Local\Temp\cc1mrjTm.s 			page 1
  222:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/portmacro.h **** 	warnings. */
  223:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/portmacro.h **** 	return ulOriginalBASEPRI;
  224:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/portmacro.h **** }
-ARM GAS  C:\Users\Simon\AppData\Local\Temp\cc1mrjTm.s 			page 14
-
-
  225:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/portmacro.h **** /*-----------------------------------------------------------*/
  226:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/portmacro.h **** 
  227:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/portmacro.h **** portFORCE_INLINE static void vPortSetBASEPRI( uint32_t ulNewMaskValue )
- 178              		.loc 2 227 30 view .LVU36
- 179              	.LBB16:
  228:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/portmacro.h **** {
  229:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/portmacro.h **** 	__asm volatile
- 180              		.loc 2 229 2 view .LVU37
- 181 0038 0023     		movs	r3, #0
- 182              		.syntax unified
- 183              	@ 229 "Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/portmacro.h" 1
- 184 003a 83F31188 			msr basepri, r3	
- 185              	@ 0 "" 2
- 186              	.LVL12:
- 187              		.loc 2 229 2 is_stmt 0 view .LVU38
- 188              		.thumb
- 189              		.syntax unified
- 190              	.LBE16:
- 191              	.LBE15:
- 214:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 		prvAddCoRoutineToReadyQueue( pxUnblockedCRCB );
- 192              		.loc 1 214 3 is_stmt 1 view .LVU39
- 214:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 		prvAddCoRoutineToReadyQueue( pxUnblockedCRCB );
- 193              		.loc 1 214 12 is_stmt 0 view .LVU40
- 194 003e 251D     		adds	r5, r4, #4
- 195 0040 2846     		mov	r0, r5
- 196 0042 FFF7FEFF 		bl	uxListRemove
- 197              	.LVL13:
- 215:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 	}
- 198              		.loc 1 215 3 is_stmt 1 view .LVU41
- 199 0046 E36A     		ldr	r3, [r4, #44]
- 200 0048 054A     		ldr	r2, .L13+8
- 201 004a 1268     		ldr	r2, [r2]
- 202 004c 9342     		cmp	r3, r2
- 203 004e D9D9     		bls	.L9
- 215:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 	}
- 204              		.loc 1 215 3 discriminator 1 view .LVU42
- 205 0050 034A     		ldr	r2, .L13+8
- 206 0052 1360     		str	r3, [r2]
- 207 0054 D6E7     		b	.L9
- 208              	.LVL14:
- 209              	.L12:
- 215:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 	}
- 210              		.loc 1 215 3 is_stmt 0 discriminator 1 view .LVU43
- 211              	.LBE17:
- 217:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** /*-----------------------------------------------------------*/
- 212              		.loc 1 217 1 view .LVU44
- 213 0056 38BD     		pop	{r3, r4, r5, pc}
- 214              	.L14:
- 215              		.align	2
- 216              	.L13:
- 217 0058 00000000 		.word	.LANCHOR0
- 218 005c 00000000 		.word	.LANCHOR3
- 219 0060 00000000 		.word	.LANCHOR6
- 220              		.cfi_endproc
- 221              	.LFE6:
- 223              		.section	.text.prvCheckDelayedList,"ax",%progbits
- 224              		.align	1
-ARM GAS  C:\Users\Simon\AppData\Local\Temp\cc1mrjTm.s 			page 15
-
-
- 225              		.syntax unified
- 226              		.thumb
- 227              		.thumb_func
- 229              	prvCheckDelayedList:
- 230              	.LFB7:
- 221:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** CRCB_t *pxCRCB;
- 231              		.loc 1 221 1 is_stmt 1 view -0
- 232              		.cfi_startproc
- 233              		@ args = 0, pretend = 0, frame = 0
- 234              		@ frame_needed = 0, uses_anonymous_args = 0
- 235 0000 38B5     		push	{r3, r4, r5, lr}
- 236              	.LCFI2:
- 237              		.cfi_def_cfa_offset 16
- 238              		.cfi_offset 3, -16
- 239              		.cfi_offset 4, -12
- 240              		.cfi_offset 5, -8
- 241              		.cfi_offset 14, -4
- 222:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 
- 242              		.loc 1 222 1 view .LVU46
- 224:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 	while( xPassedTicks )
- 243              		.loc 1 224 2 view .LVU47
- 224:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 	while( xPassedTicks )
- 244              		.loc 1 224 17 is_stmt 0 view .LVU48
- 245 0002 FFF7FEFF 		bl	xTaskGetTickCount
- 246              	.LVL15:
- 224:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 	while( xPassedTicks )
- 247              		.loc 1 224 37 view .LVU49
- 248 0006 274B     		ldr	r3, .L25
- 249 0008 1B68     		ldr	r3, [r3]
- 250 000a C31A     		subs	r3, r0, r3
- 224:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 	while( xPassedTicks )
- 251              		.loc 1 224 15 view .LVU50
- 252 000c 264A     		ldr	r2, .L25+4
- 253 000e 1360     		str	r3, [r2]
- 225:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 	{
- 254              		.loc 1 225 2 is_stmt 1 view .LVU51
- 255              	.L16:
- 225:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 	{
- 256              		.loc 1 225 9 view .LVU52
- 257 0010 254B     		ldr	r3, .L25+4
- 258 0012 1B68     		ldr	r3, [r3]
- 259 0014 002B     		cmp	r3, #0
- 260 0016 3FD0     		beq	.L24
- 227:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 		xPassedTicks--;
- 261              		.loc 1 227 3 view .LVU53
- 227:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 		xPassedTicks--;
- 262              		.loc 1 227 22 is_stmt 0 view .LVU54
- 263 0018 2449     		ldr	r1, .L25+8
- 264 001a 0A68     		ldr	r2, [r1]
- 265 001c 0132     		adds	r2, r2, #1
- 266 001e 0A60     		str	r2, [r1]
- 228:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 
- 267              		.loc 1 228 3 is_stmt 1 view .LVU55
- 228:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 
- 268              		.loc 1 228 15 is_stmt 0 view .LVU56
- 269 0020 013B     		subs	r3, r3, #1
- 270 0022 2149     		ldr	r1, .L25+4
-ARM GAS  C:\Users\Simon\AppData\Local\Temp\cc1mrjTm.s 			page 16
-
-
- 271 0024 0B60     		str	r3, [r1]
- 231:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 		{
- 272              		.loc 1 231 3 is_stmt 1 view .LVU57
- 231:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 		{
- 273              		.loc 1 231 5 is_stmt 0 view .LVU58
- 274 0026 72B9     		cbnz	r2, .L18
- 275              	.LBB18:
- 233:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 
- 276              		.loc 1 233 4 is_stmt 1 view .LVU59
- 237:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 			pxDelayedCoRoutineList = pxOverflowDelayedCoRoutineList;
- 277              		.loc 1 237 4 view .LVU60
- 237:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 			pxDelayedCoRoutineList = pxOverflowDelayedCoRoutineList;
- 278              		.loc 1 237 11 is_stmt 0 view .LVU61
- 279 0028 214A     		ldr	r2, .L25+12
- 280 002a 1168     		ldr	r1, [r2]
- 281              	.LVL16:
- 238:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 			pxOverflowDelayedCoRoutineList = pxTemp;
- 282              		.loc 1 238 4 is_stmt 1 view .LVU62
- 238:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 			pxOverflowDelayedCoRoutineList = pxTemp;
- 283              		.loc 1 238 27 is_stmt 0 view .LVU63
- 284 002c 214B     		ldr	r3, .L25+16
- 285 002e 1868     		ldr	r0, [r3]
- 286 0030 1060     		str	r0, [r2]
- 239:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 		}
- 287              		.loc 1 239 4 is_stmt 1 view .LVU64
- 239:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 		}
- 288              		.loc 1 239 35 is_stmt 0 view .LVU65
- 289 0032 1960     		str	r1, [r3]
- 290 0034 07E0     		b	.L18
- 291              	.LVL17:
- 292              	.L20:
- 239:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 		}
- 293              		.loc 1 239 35 view .LVU66
- 294              	.LBE18:
- 270:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 		}
- 295              		.loc 1 270 4 is_stmt 1 discriminator 3 view .LVU67
- 296 0036 00EB8000 		add	r0, r0, r0, lsl #2
- 297 003a 2946     		mov	r1, r5
- 298 003c 1E4B     		ldr	r3, .L25+20
- 299 003e 03EB8000 		add	r0, r3, r0, lsl #2
- 300 0042 FFF7FEFF 		bl	vListInsertEnd
- 301              	.LVL18:
- 302              	.L18:
- 270:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 		}
- 303              		.loc 1 270 41 discriminator 4 view .LVU68
- 243:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 		{
- 304              		.loc 1 243 54 discriminator 4 view .LVU69
- 243:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 		{
- 305              		.loc 1 243 10 is_stmt 0 discriminator 4 view .LVU70
- 306 0046 1A4B     		ldr	r3, .L25+12
- 307 0048 1B68     		ldr	r3, [r3]
- 308 004a 1A68     		ldr	r2, [r3]
- 243:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 		{
- 309              		.loc 1 243 54 discriminator 4 view .LVU71
- 310 004c 002A     		cmp	r2, #0
- 311 004e DFD0     		beq	.L16
- 245:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 
-ARM GAS  C:\Users\Simon\AppData\Local\Temp\cc1mrjTm.s 			page 17
-
-
- 312              		.loc 1 245 4 is_stmt 1 view .LVU72
- 245:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 
- 313              		.loc 1 245 26 is_stmt 0 view .LVU73
- 314 0050 DB68     		ldr	r3, [r3, #12]
- 245:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 
- 315              		.loc 1 245 11 view .LVU74
- 316 0052 DC68     		ldr	r4, [r3, #12]
- 317              	.LVL19:
- 247:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 			{
- 318              		.loc 1 247 4 is_stmt 1 view .LVU75
- 247:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 			{
- 319              		.loc 1 247 30 is_stmt 0 view .LVU76
- 320 0054 6268     		ldr	r2, [r4, #4]
- 247:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 			{
- 321              		.loc 1 247 28 view .LVU77
- 322 0056 154B     		ldr	r3, .L25+8
- 323 0058 1B68     		ldr	r3, [r3]
- 247:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 			{
- 324              		.loc 1 247 6 view .LVU78
- 325 005a 9A42     		cmp	r2, r3
- 326 005c D8D8     		bhi	.L16
- 253:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 			{
- 327              		.loc 1 253 4 is_stmt 1 view .LVU79
- 328              	.LBB19:
- 329              	.LBI19:
+ 385              		.loc 2 229 2 view .LVU111
+ 386 0010 4FF00008 		mov	r8, #0
+ 387              	.L19:
+ 388              	.LBE35:
+ 389              	.LBE34:
+ 204:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 
+ 390              		.loc 1 204 3 is_stmt 1 view .LVU112
+ 207:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 		{
+ 391              		.loc 1 207 3 view .LVU113
+ 392              	.LBB37:
+ 393              	.LBI37:
  191:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/portmacro.h **** {
- 330              		.loc 2 191 30 view .LVU80
- 331              	.LBB20:
+ 394              		.loc 2 191 30 view .LVU114
+ 395              	.LBB38:
  193:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/portmacro.h **** 
- 332              		.loc 2 193 1 view .LVU81
+ 396              		.loc 2 193 1 view .LVU115
  195:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/portmacro.h **** 	(
- 333              		.loc 2 195 2 view .LVU82
- 334              		.syntax unified
- 335              	@ 195 "Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/portmacro.h" 1
- 336 005e 4FF05003 			mov r3, #80												
- 337 0062 83F31188 		msr basepri, r3											
- 338 0066 BFF36F8F 		isb														
- 339 006a BFF34F8F 		dsb														
- 340              	
- 341              	@ 0 "" 2
- 342              		.thumb
- 343              		.syntax unified
- 344              	.LBE20:
- 345              	.LBE19:
- 260:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 
- 346              		.loc 1 260 5 view .LVU83
- 260:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 
- 347              		.loc 1 260 14 is_stmt 0 view .LVU84
- 348 006e 251D     		adds	r5, r4, #4
- 349 0070 2846     		mov	r0, r5
- 350 0072 FFF7FEFF 		bl	uxListRemove
- 351              	.LVL20:
- 263:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 				{
- 352              		.loc 1 263 5 is_stmt 1 view .LVU85
- 263:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 				{
- 353              		.loc 1 263 31 is_stmt 0 view .LVU86
- 354 0076 A36A     		ldr	r3, [r4, #40]
-ARM GAS  C:\Users\Simon\AppData\Local\Temp\cc1mrjTm.s 			page 18
+ 397              		.loc 2 195 2 view .LVU116
+ 398              		.syntax unified
+ 399              	@ 195 "Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/portmacro.h" 1
+ 400 0014 4FF05003 			mov r3, #80												
+ 401 0018 83F31188 		msr basepri, r3											
+ 402 001c BFF36F8F 		isb														
+ 403 0020 BFF34F8F 		dsb														
+ARM GAS  C:\Users\Simon\AppData\Local\Temp\ccfMDuob.s 			page 19
 
 
- 263:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 				{
- 355              		.loc 1 263 7 view .LVU87
- 356 0078 1BB1     		cbz	r3, .L19
- 265:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 				}
- 357              		.loc 1 265 6 is_stmt 1 view .LVU88
- 265:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 				}
- 358              		.loc 1 265 15 is_stmt 0 view .LVU89
- 359 007a 04F11800 		add	r0, r4, #24
- 360 007e FFF7FEFF 		bl	uxListRemove
- 361              	.LVL21:
- 362              	.L19:
- 268:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 
- 363              		.loc 1 268 4 is_stmt 1 view .LVU90
- 364              	.LBB21:
- 365              	.LBI21:
+ 404              	
+ 405              	@ 0 "" 2
+ 406              		.thumb
+ 407              		.syntax unified
+ 408              	.LBE38:
+ 409              	.LBE37:
+ 209:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 			( void ) uxListRemove( &( pxUnblockedCRCB->xEventListItem ) );
+ 410              		.loc 1 209 4 view .LVU117
+ 209:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 			( void ) uxListRemove( &( pxUnblockedCRCB->xEventListItem ) );
+ 411              		.loc 1 209 20 is_stmt 0 view .LVU118
+ 412 0024 FB68     		ldr	r3, [r7, #12]
+ 413 0026 DE68     		ldr	r6, [r3, #12]
+ 414              	.LVL29:
+ 210:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 		}
+ 415              		.loc 1 210 4 is_stmt 1 view .LVU119
+ 210:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 		}
+ 416              		.loc 1 210 13 is_stmt 0 view .LVU120
+ 417 0028 06F11800 		add	r0, r6, #24
+ 418 002c FFF7FEFF 		bl	uxListRemove
+ 419              	.LVL30:
+ 212:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 
+ 420              		.loc 1 212 3 is_stmt 1 view .LVU121
+ 421              	.LBB39:
+ 422              	.LBI34:
  227:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/portmacro.h **** {
- 366              		.loc 2 227 30 view .LVU91
- 367              	.LBB22:
- 368              		.loc 2 229 2 view .LVU92
- 369 0082 0023     		movs	r3, #0
- 370              		.syntax unified
- 371              	@ 229 "Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/portmacro.h" 1
- 372 0084 83F31188 			msr basepri, r3	
- 373              	@ 0 "" 2
- 374              	.LVL22:
- 375              		.loc 2 229 2 is_stmt 0 view .LVU93
- 376              		.thumb
- 377              		.syntax unified
- 378              	.LBE22:
- 379              	.LBE21:
- 270:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 		}
- 380              		.loc 1 270 4 is_stmt 1 view .LVU94
- 381 0088 E06A     		ldr	r0, [r4, #44]
- 382 008a 0C4B     		ldr	r3, .L25+24
- 383 008c 1B68     		ldr	r3, [r3]
- 384 008e 9842     		cmp	r0, r3
- 385 0090 D1D9     		bls	.L20
- 270:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 		}
- 386              		.loc 1 270 4 discriminator 1 view .LVU95
- 387 0092 0A4B     		ldr	r3, .L25+24
- 388 0094 1860     		str	r0, [r3]
- 389 0096 CEE7     		b	.L20
- 390              	.LVL23:
- 391              	.L24:
- 274:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** }
- 392              		.loc 1 274 2 view .LVU96
- 274:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** }
- 393              		.loc 1 274 17 is_stmt 0 view .LVU97
- 394 0098 044B     		ldr	r3, .L25+8
- 395 009a 1A68     		ldr	r2, [r3]
- 396 009c 014B     		ldr	r3, .L25
- 397 009e 1A60     		str	r2, [r3]
- 275:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** /*-----------------------------------------------------------*/
- 398              		.loc 1 275 1 view .LVU98
- 399 00a0 38BD     		pop	{r3, r4, r5, pc}
- 400              	.L26:
- 401 00a2 00BF     		.align	2
-ARM GAS  C:\Users\Simon\AppData\Local\Temp\cc1mrjTm.s 			page 19
+ 423              		.loc 2 227 30 view .LVU122
+ 424              	.LBB36:
+ 425              		.loc 2 229 2 view .LVU123
+ 426              		.syntax unified
+ 427              	@ 229 "Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/portmacro.h" 1
+ 428 0030 88F31188 			msr basepri, r8	
+ 429              	@ 0 "" 2
+ 430              	.LVL31:
+ 431              		.loc 2 229 2 is_stmt 0 view .LVU124
+ 432              		.thumb
+ 433              		.syntax unified
+ 434              	.LBE36:
+ 435              	.LBE39:
+ 214:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 		prvAddCoRoutineToReadyQueue( pxUnblockedCRCB );
+ 436              		.loc 1 214 3 is_stmt 1 view .LVU125
+ 214:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 		prvAddCoRoutineToReadyQueue( pxUnblockedCRCB );
+ 437              		.loc 1 214 12 is_stmt 0 view .LVU126
+ 438 0034 311D     		adds	r1, r6, #4
+ 439 0036 0846     		mov	r0, r1
+ 440 0038 0091     		str	r1, [sp]
+ 441 003a FFF7FEFF 		bl	uxListRemove
+ 442              	.LVL32:
+ 215:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 	}
+ 443              		.loc 1 215 3 is_stmt 1 view .LVU127
+ 215:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 	}
+ 444              		.loc 1 215 3 view .LVU128
+ 215:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 	}
+ 445              		.loc 1 215 3 view .LVU129
+ 446 003e F36A     		ldr	r3, [r6, #44]
+ 447 0040 2268     		ldr	r2, [r4]
+ 448 0042 03EB8300 		add	r0, r3, r3, lsl #2
+ 449 0046 0099     		ldr	r1, [sp]
+ARM GAS  C:\Users\Simon\AppData\Local\Temp\ccfMDuob.s 			page 20
 
 
- 402              	.L25:
- 403 00a4 00000000 		.word	.LANCHOR7
- 404 00a8 00000000 		.word	.LANCHOR8
- 405 00ac 00000000 		.word	.LANCHOR9
- 406 00b0 00000000 		.word	.LANCHOR4
- 407 00b4 00000000 		.word	.LANCHOR5
- 408 00b8 00000000 		.word	.LANCHOR0
- 409 00bc 00000000 		.word	.LANCHOR6
- 410              		.cfi_endproc
- 411              	.LFE7:
- 413              		.section	.text.xCoRoutineCreate,"ax",%progbits
- 414              		.align	1
- 415              		.global	xCoRoutineCreate
- 416              		.syntax unified
- 417              		.thumb
- 418              		.thumb_func
- 420              	xCoRoutineCreate:
- 421              	.LVL24:
- 422              	.LFB4:
- 103:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** BaseType_t xReturn;
- 423              		.loc 1 103 1 is_stmt 1 view -0
- 424              		.cfi_startproc
- 425              		@ args = 0, pretend = 0, frame = 0
- 426              		@ frame_needed = 0, uses_anonymous_args = 0
- 103:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** BaseType_t xReturn;
- 427              		.loc 1 103 1 is_stmt 0 view .LVU100
- 428 0000 F8B5     		push	{r3, r4, r5, r6, r7, lr}
- 429              	.LCFI3:
- 430              		.cfi_def_cfa_offset 24
- 431              		.cfi_offset 3, -24
- 432              		.cfi_offset 4, -20
- 433              		.cfi_offset 5, -16
- 434              		.cfi_offset 6, -12
- 435              		.cfi_offset 7, -8
- 436              		.cfi_offset 14, -4
- 437 0002 0746     		mov	r7, r0
- 438 0004 0D46     		mov	r5, r1
- 439 0006 1646     		mov	r6, r2
- 104:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** CRCB_t *pxCoRoutine;
- 440              		.loc 1 104 1 is_stmt 1 view .LVU101
- 105:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 
- 441              		.loc 1 105 1 view .LVU102
- 108:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 	if( pxCoRoutine )
- 442              		.loc 1 108 2 view .LVU103
- 108:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 	if( pxCoRoutine )
- 443              		.loc 1 108 29 is_stmt 0 view .LVU104
- 444 0008 3820     		movs	r0, #56
- 445              	.LVL25:
- 108:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 	if( pxCoRoutine )
- 446              		.loc 1 108 29 view .LVU105
- 447 000a FFF7FEFF 		bl	pvPortMalloc
- 448              	.LVL26:
- 109:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 	{
- 449              		.loc 1 109 2 is_stmt 1 view .LVU106
- 109:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 	{
- 450              		.loc 1 109 4 is_stmt 0 view .LVU107
- 451 000e 78B3     		cbz	r0, .L32
-ARM GAS  C:\Users\Simon\AppData\Local\Temp\cc1mrjTm.s 			page 20
-
-
- 452 0010 0446     		mov	r4, r0
- 113:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 		{
- 453              		.loc 1 113 3 is_stmt 1 view .LVU108
- 113:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 		{
- 454              		.loc 1 113 26 is_stmt 0 view .LVU109
- 455 0012 194B     		ldr	r3, .L36
- 456 0014 1B68     		ldr	r3, [r3]
- 113:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 		{
- 457              		.loc 1 113 5 view .LVU110
- 458 0016 33B3     		cbz	r3, .L35
- 459              	.LVL27:
- 460              	.L29:
- 120:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 		{
- 461              		.loc 1 120 3 is_stmt 1 view .LVU111
- 120:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 		{
- 462              		.loc 1 120 5 is_stmt 0 view .LVU112
- 463 0018 012D     		cmp	r5, #1
- 464 001a 00D9     		bls	.L30
- 122:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 		}
- 465              		.loc 1 122 15 view .LVU113
- 466 001c 0125     		movs	r5, #1
- 467              	.LVL28:
- 468              	.L30:
- 126:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 		pxCoRoutine->uxPriority = uxPriority;
- 469              		.loc 1 126 3 is_stmt 1 view .LVU114
- 126:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 		pxCoRoutine->uxPriority = uxPriority;
- 470              		.loc 1 126 24 is_stmt 0 view .LVU115
- 471 001e 0023     		movs	r3, #0
- 472 0020 A386     		strh	r3, [r4, #52]	@ movhi
- 127:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 		pxCoRoutine->uxIndex = uxIndex;
- 473              		.loc 1 127 3 is_stmt 1 view .LVU116
- 127:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 		pxCoRoutine->uxIndex = uxIndex;
- 474              		.loc 1 127 27 is_stmt 0 view .LVU117
- 475 0022 E562     		str	r5, [r4, #44]
- 128:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 		pxCoRoutine->pxCoRoutineFunction = pxCoRoutineCode;
- 476              		.loc 1 128 3 is_stmt 1 view .LVU118
- 128:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 		pxCoRoutine->pxCoRoutineFunction = pxCoRoutineCode;
- 477              		.loc 1 128 24 is_stmt 0 view .LVU119
- 478 0024 2663     		str	r6, [r4, #48]
- 129:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 
- 479              		.loc 1 129 3 is_stmt 1 view .LVU120
- 129:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 
- 480              		.loc 1 129 36 is_stmt 0 view .LVU121
- 481 0026 2646     		mov	r6, r4
- 482              	.LVL29:
- 129:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 
- 483              		.loc 1 129 36 view .LVU122
- 484 0028 46F8047B 		str	r7, [r6], #4
- 485              	.LVL30:
- 132:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 		vListInitialiseItem( &( pxCoRoutine->xEventListItem ) );
- 486              		.loc 1 132 3 is_stmt 1 view .LVU123
- 487 002c 3046     		mov	r0, r6
- 488 002e FFF7FEFF 		bl	vListInitialiseItem
- 489              	.LVL31:
- 133:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 
- 490              		.loc 1 133 3 view .LVU124
- 491 0032 04F11800 		add	r0, r4, #24
-ARM GAS  C:\Users\Simon\AppData\Local\Temp\cc1mrjTm.s 			page 21
-
-
- 492 0036 FFF7FEFF 		bl	vListInitialiseItem
- 493              	.LVL32:
- 138:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 		listSET_LIST_ITEM_OWNER( &( pxCoRoutine->xEventListItem ), pxCoRoutine );
- 494              		.loc 1 138 3 view .LVU125
- 495 003a 2461     		str	r4, [r4, #16]
- 139:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 
- 496              		.loc 1 139 3 view .LVU126
- 497 003c 6462     		str	r4, [r4, #36]
- 142:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 
- 498              		.loc 1 142 3 view .LVU127
- 499 003e C5F10205 		rsb	r5, r5, #2
- 500              	.LVL33:
- 142:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 
- 501              		.loc 1 142 3 is_stmt 0 view .LVU128
- 502 0042 A561     		str	r5, [r4, #24]
- 146:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 
- 503              		.loc 1 146 3 is_stmt 1 view .LVU129
- 504 0044 E06A     		ldr	r0, [r4, #44]
- 505 0046 0D4B     		ldr	r3, .L36+4
- 506 0048 1B68     		ldr	r3, [r3]
- 507 004a 9842     		cmp	r0, r3
- 508 004c 01D9     		bls	.L31
- 146:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 
- 509              		.loc 1 146 3 discriminator 1 view .LVU130
- 510 004e 0B4B     		ldr	r3, .L36+4
- 511 0050 1860     		str	r0, [r3]
- 512              	.L31:
- 146:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 
- 513              		.loc 1 146 3 discriminator 3 view .LVU131
- 514 0052 00EB8000 		add	r0, r0, r0, lsl #2
- 515 0056 3146     		mov	r1, r6
- 516 0058 094B     		ldr	r3, .L36+8
- 517 005a 03EB8000 		add	r0, r3, r0, lsl #2
- 518 005e FFF7FEFF 		bl	vListInsertEnd
- 519              	.LVL34:
- 146:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 
- 520              		.loc 1 146 45 discriminator 3 view .LVU132
- 148:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 	}
- 521              		.loc 1 148 3 discriminator 3 view .LVU133
- 148:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 	}
- 522              		.loc 1 148 11 is_stmt 0 discriminator 3 view .LVU134
- 523 0062 0120     		movs	r0, #1
- 524              	.LVL35:
- 525              	.L27:
- 156:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** /*-----------------------------------------------------------*/
- 526              		.loc 1 156 1 view .LVU135
- 527 0064 F8BD     		pop	{r3, r4, r5, r6, r7, pc}
- 528              	.LVL36:
- 529              	.L35:
- 115:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 			prvInitialiseCoRoutineLists();
- 530              		.loc 1 115 4 is_stmt 1 view .LVU136
- 115:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 			prvInitialiseCoRoutineLists();
- 531              		.loc 1 115 23 is_stmt 0 view .LVU137
- 532 0066 044B     		ldr	r3, .L36
- 533 0068 1860     		str	r0, [r3]
- 116:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 		}
- 534              		.loc 1 116 4 is_stmt 1 view .LVU138
-ARM GAS  C:\Users\Simon\AppData\Local\Temp\cc1mrjTm.s 			page 22
-
-
- 535 006a FFF7FEFF 		bl	prvInitialiseCoRoutineLists
- 536              	.LVL37:
- 116:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 		}
- 537              		.loc 1 116 4 is_stmt 0 view .LVU139
- 538 006e D3E7     		b	.L29
- 539              	.LVL38:
- 540              	.L32:
- 152:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 	}
- 541              		.loc 1 152 11 view .LVU140
- 542 0070 4FF0FF30 		mov	r0, #-1
- 543              	.LVL39:
- 155:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** }
- 544              		.loc 1 155 2 is_stmt 1 view .LVU141
- 155:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** }
- 545              		.loc 1 155 9 is_stmt 0 view .LVU142
- 546 0074 F6E7     		b	.L27
- 547              	.L37:
- 548 0076 00BF     		.align	2
- 549              	.L36:
- 550 0078 00000000 		.word	.LANCHOR10
- 551 007c 00000000 		.word	.LANCHOR6
- 552 0080 00000000 		.word	.LANCHOR0
- 553              		.cfi_endproc
- 554              	.LFE4:
- 556              		.section	.text.vCoRoutineAddToDelayedList,"ax",%progbits
- 557              		.align	1
- 558              		.global	vCoRoutineAddToDelayedList
- 559              		.syntax unified
- 560              		.thumb
- 561              		.thumb_func
- 563              	vCoRoutineAddToDelayedList:
- 564              	.LVL40:
- 565              	.LFB5:
- 160:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** TickType_t xTimeToWake;
- 566              		.loc 1 160 1 is_stmt 1 view -0
- 567              		.cfi_startproc
- 568              		@ args = 0, pretend = 0, frame = 0
- 569              		@ frame_needed = 0, uses_anonymous_args = 0
- 160:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** TickType_t xTimeToWake;
- 570              		.loc 1 160 1 is_stmt 0 view .LVU144
- 571 0000 F8B5     		push	{r3, r4, r5, r6, r7, lr}
- 572              	.LCFI4:
- 573              		.cfi_def_cfa_offset 24
- 574              		.cfi_offset 3, -24
- 575              		.cfi_offset 4, -20
- 576              		.cfi_offset 5, -16
- 577              		.cfi_offset 6, -12
- 578              		.cfi_offset 7, -8
- 579              		.cfi_offset 14, -4
- 580 0002 0D46     		mov	r5, r1
- 161:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 
- 581              		.loc 1 161 1 is_stmt 1 view .LVU145
- 165:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 
- 582              		.loc 1 165 2 view .LVU146
- 165:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 
- 583              		.loc 1 165 36 is_stmt 0 view .LVU147
- 584 0004 0F4E     		ldr	r6, .L43
-ARM GAS  C:\Users\Simon\AppData\Local\Temp\cc1mrjTm.s 			page 23
-
-
- 585 0006 3468     		ldr	r4, [r6]
- 165:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 
- 586              		.loc 1 165 14 view .LVU148
- 587 0008 0444     		add	r4, r4, r0
- 588              	.LVL41:
- 170:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 
- 589              		.loc 1 170 2 is_stmt 1 view .LVU149
- 170:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 
- 590              		.loc 1 170 63 is_stmt 0 view .LVU150
- 591 000a 0F4F     		ldr	r7, .L43+4
- 592 000c 3868     		ldr	r0, [r7]
- 593              	.LVL42:
- 170:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 
- 594              		.loc 1 170 11 view .LVU151
- 595 000e 0430     		adds	r0, r0, #4
- 596 0010 FFF7FEFF 		bl	uxListRemove
- 597              	.LVL43:
- 173:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 
- 598              		.loc 1 173 2 is_stmt 1 view .LVU152
- 599 0014 3968     		ldr	r1, [r7]
- 600 0016 4C60     		str	r4, [r1, #4]
- 175:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 	{
- 601              		.loc 1 175 2 view .LVU153
- 175:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 	{
- 602              		.loc 1 175 18 is_stmt 0 view .LVU154
- 603 0018 3368     		ldr	r3, [r6]
- 175:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 	{
- 604              		.loc 1 175 4 view .LVU155
- 605 001a A342     		cmp	r3, r4
- 606 001c 0CD9     		bls	.L39
- 179:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 	}
- 607              		.loc 1 179 3 is_stmt 1 view .LVU156
- 608 001e 0431     		adds	r1, r1, #4
- 609 0020 0A4B     		ldr	r3, .L43+8
- 610 0022 1868     		ldr	r0, [r3]
- 611 0024 FFF7FEFF 		bl	vListInsert
- 612              	.LVL44:
- 613              	.L40:
- 188:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 	{
- 614              		.loc 1 188 2 view .LVU157
- 188:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 	{
- 615              		.loc 1 188 4 is_stmt 0 view .LVU158
- 616 0028 2DB1     		cbz	r5, .L38
- 192:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 	}
- 617              		.loc 1 192 3 is_stmt 1 view .LVU159
- 192:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 	}
- 618              		.loc 1 192 50 is_stmt 0 view .LVU160
- 619 002a 074B     		ldr	r3, .L43+4
- 620 002c 1968     		ldr	r1, [r3]
- 192:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 	}
- 621              		.loc 1 192 3 view .LVU161
- 622 002e 1831     		adds	r1, r1, #24
- 623 0030 2846     		mov	r0, r5
- 624 0032 FFF7FEFF 		bl	vListInsert
- 625              	.LVL45:
- 626              	.L38:
- 194:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** /*-----------------------------------------------------------*/
-ARM GAS  C:\Users\Simon\AppData\Local\Temp\cc1mrjTm.s 			page 24
-
-
- 627              		.loc 1 194 1 view .LVU162
- 628 0036 F8BD     		pop	{r3, r4, r5, r6, r7, pc}
- 629              	.LVL46:
- 630              	.L39:
- 185:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 	}
- 631              		.loc 1 185 3 is_stmt 1 view .LVU163
- 632 0038 0431     		adds	r1, r1, #4
- 633 003a 054B     		ldr	r3, .L43+12
- 634 003c 1868     		ldr	r0, [r3]
- 635 003e FFF7FEFF 		bl	vListInsert
- 636              	.LVL47:
- 637 0042 F1E7     		b	.L40
- 638              	.L44:
- 639              		.align	2
- 640              	.L43:
- 641 0044 00000000 		.word	.LANCHOR9
- 642 0048 00000000 		.word	.LANCHOR10
- 643 004c 00000000 		.word	.LANCHOR5
- 644 0050 00000000 		.word	.LANCHOR4
- 645              		.cfi_endproc
- 646              	.LFE5:
- 648              		.section	.text.vCoRoutineSchedule,"ax",%progbits
- 649              		.align	1
- 650              		.global	vCoRoutineSchedule
- 651              		.syntax unified
- 652              		.thumb
- 653              		.thumb_func
- 655              	vCoRoutineSchedule:
- 656              	.LFB8:
- 279:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 	/* See if any co-routines readied by events need moving to the ready lists. */
- 657              		.loc 1 279 1 view -0
- 658              		.cfi_startproc
- 659              		@ args = 0, pretend = 0, frame = 0
- 660              		@ frame_needed = 0, uses_anonymous_args = 0
- 661 0000 08B5     		push	{r3, lr}
- 662              	.LCFI5:
- 663              		.cfi_def_cfa_offset 8
- 664              		.cfi_offset 3, -8
- 665              		.cfi_offset 14, -4
- 281:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 
- 666              		.loc 1 281 2 view .LVU165
- 667 0002 FFF7FEFF 		bl	prvCheckPendingReadyList
- 668              	.LVL48:
+ 450 0048 9342     		cmp	r3, r2
+ 451 004a 05EB8000 		add	r0, r5, r0, lsl #2
+ 452 004e 88BF     		it	hi
+ 453 0050 2360     		strhi	r3, [r4]
+ 454 0052 FFF7FEFF 		bl	vListInsertEnd
+ 455              	.LVL33:
+ 215:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 	}
+ 456              		.loc 1 215 49 view .LVU130
+ 457              	.LBE40:
+ 202:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 	{
+ 458              		.loc 1 202 58 view .LVU131
+ 202:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 	{
+ 459              		.loc 1 202 9 is_stmt 0 view .LVU132
+ 460 0056 3B68     		ldr	r3, [r7]
+ 202:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 	{
+ 461              		.loc 1 202 58 view .LVU133
+ 462 0058 002B     		cmp	r3, #0
+ 463 005a DBD1     		bne	.L19
+ 464              	.LVL34:
+ 465              	.L23:
+ 202:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 	{
+ 466              		.loc 1 202 58 view .LVU134
+ 467              	.LBE42:
+ 468              	.LBE44:
  284:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 
- 669              		.loc 1 284 2 view .LVU166
- 670 0006 FFF7FEFF 		bl	prvCheckDelayedList
- 671              	.LVL49:
+ 469              		.loc 1 284 2 is_stmt 1 view .LVU135
+ 470              	.LBB45:
+ 471              	.LBI45:
+ 220:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** {
+ 472              		.loc 1 220 13 view .LVU136
+ 473              	.LBB46:
+ 222:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 
+ 474              		.loc 1 222 1 view .LVU137
+ 224:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 	while( xPassedTicks )
+ 475              		.loc 1 224 2 view .LVU138
+ 224:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 	while( xPassedTicks )
+ 476              		.loc 1 224 17 is_stmt 0 view .LVU139
+ 477 005c FFF7FEFF 		bl	xTaskGetTickCount
+ 478              	.LVL35:
+ 224:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 	while( xPassedTicks )
+ 479              		.loc 1 224 37 view .LVU140
+ 480 0060 4B4B     		ldr	r3, .L58+12
+ 224:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 	while( xPassedTicks )
+ 481              		.loc 1 224 15 view .LVU141
+ 482 0062 DFF83C91 		ldr	r9, .L58+28
+ 224:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 	while( xPassedTicks )
+ 483              		.loc 1 224 37 view .LVU142
+ 484 0066 1B68     		ldr	r3, [r3]
+ 485 0068 C01A     		subs	r0, r0, r3
+ 224:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 	while( xPassedTicks )
+ 486              		.loc 1 224 15 view .LVU143
+ 487 006a C9F80000 		str	r0, [r9]
+ 225:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 	{
+ 488              		.loc 1 225 2 is_stmt 1 view .LVU144
+ 225:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 	{
+ 489              		.loc 1 225 9 view .LVU145
+ 490 006e 0028     		cmp	r0, #0
+ARM GAS  C:\Users\Simon\AppData\Local\Temp\ccfMDuob.s 			page 21
+
+
+ 491 0070 00F08580 		beq	.L54
+ 274:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** }
+ 492              		.loc 1 274 17 is_stmt 0 view .LVU146
+ 493 0074 474F     		ldr	r7, .L58+16
+ 494              	.LBB47:
+ 495              	.LBB48:
+ 496              		.loc 2 229 2 view .LVU147
+ 497 0076 4FF00008 		mov	r8, #0
+ 498 007a 474E     		ldr	r6, .L58+20
+ 499              	.LBE48:
+ 500              	.LBE47:
+ 501              	.LBB50:
+ 238:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 			pxOverflowDelayedCoRoutineList = pxTemp;
+ 502              		.loc 1 238 27 view .LVU148
+ 503 007c DFF824A1 		ldr	r10, .L58+32
+ 504              	.LBE50:
+ 274:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** }
+ 505              		.loc 1 274 17 view .LVU149
+ 506 0080 3A68     		ldr	r2, [r7]
+ 507              	.L32:
+ 227:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 		xPassedTicks--;
+ 508              		.loc 1 227 3 is_stmt 1 view .LVU150
+ 227:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 		xPassedTicks--;
+ 509              		.loc 1 227 22 is_stmt 0 view .LVU151
+ 510 0082 0132     		adds	r2, r2, #1
+ 228:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 
+ 511              		.loc 1 228 15 view .LVU152
+ 512 0084 0138     		subs	r0, r0, #1
+ 227:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 		xPassedTicks--;
+ 513              		.loc 1 227 22 view .LVU153
+ 514 0086 3A60     		str	r2, [r7]
+ 228:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 
+ 515              		.loc 1 228 3 is_stmt 1 view .LVU154
+ 228:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 
+ 516              		.loc 1 228 15 is_stmt 0 view .LVU155
+ 517 0088 C9F80000 		str	r0, [r9]
+ 231:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 		{
+ 518              		.loc 1 231 3 is_stmt 1 view .LVU156
+ 231:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 		{
+ 519              		.loc 1 231 5 is_stmt 0 view .LVU157
+ 520 008c 002A     		cmp	r2, #0
+ 521 008e 60D0     		beq	.L24
+ 522              	.LBB51:
+ 237:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 			pxDelayedCoRoutineList = pxOverflowDelayedCoRoutineList;
+ 523              		.loc 1 237 11 view .LVU158
+ 524 0090 3368     		ldr	r3, [r6]
+ 525              	.L25:
+ 526              	.LBE51:
+ 270:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 		}
+ 527              		.loc 1 270 41 is_stmt 1 view .LVU159
+ 243:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 		{
+ 528              		.loc 1 243 54 view .LVU160
+ 243:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 		{
+ 529              		.loc 1 243 10 is_stmt 0 view .LVU161
+ 530 0092 1968     		ldr	r1, [r3]
+ 243:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 		{
+ 531              		.loc 1 243 54 view .LVU162
+ARM GAS  C:\Users\Simon\AppData\Local\Temp\ccfMDuob.s 			page 22
+
+
+ 532 0094 51BB     		cbnz	r1, .L31
+ 533 0096 32E0     		b	.L26
+ 534              	.LVL36:
+ 535              	.L27:
+ 536              	.LBB52:
+ 537              	.LBB53:
+ 195:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/portmacro.h **** 	(
+ 538              		.loc 2 195 2 view .LVU163
+ 539              		.syntax unified
+ 540              	@ 195 "Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/portmacro.h" 1
+ 541 0098 4FF05002 			mov r2, #80												
+ 542 009c 82F31188 		msr basepri, r2											
+ 543 00a0 BFF36F8F 		isb														
+ 544 00a4 BFF34F8F 		dsb														
+ 545              	
+ 546              	@ 0 "" 2
+ 547              		.thumb
+ 548              		.syntax unified
+ 549              	.LBE53:
+ 550              	.LBE52:
+ 260:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 
+ 551              		.loc 1 260 5 is_stmt 1 view .LVU164
+ 260:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 
+ 552              		.loc 1 260 14 is_stmt 0 view .LVU165
+ 553 00a8 0BF10401 		add	r1, fp, #4
+ 554 00ac 0846     		mov	r0, r1
+ 555 00ae 0091     		str	r1, [sp]
+ 556 00b0 FFF7FEFF 		bl	uxListRemove
+ 557              	.LVL37:
+ 263:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 				{
+ 558              		.loc 1 263 5 is_stmt 1 view .LVU166
+ 265:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 				}
+ 559              		.loc 1 265 6 view .LVU167
+ 263:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 				{
+ 560              		.loc 1 263 7 is_stmt 0 view .LVU168
+ 561 00b4 DBF82820 		ldr	r2, [fp, #40]
+ 265:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 				}
+ 562              		.loc 1 265 15 view .LVU169
+ 563 00b8 0BF11800 		add	r0, fp, #24
+ 263:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 				{
+ 564              		.loc 1 263 7 view .LVU170
+ 565 00bc 0099     		ldr	r1, [sp]
+ 566 00be 12B1     		cbz	r2, .L28
+ 265:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 				}
+ 567              		.loc 1 265 15 view .LVU171
+ 568 00c0 FFF7FEFF 		bl	uxListRemove
+ 569              	.LVL38:
+ 570 00c4 0099     		ldr	r1, [sp]
+ 571              	.L28:
+ 268:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 
+ 572              		.loc 1 268 4 is_stmt 1 view .LVU172
+ 573              	.LVL39:
+ 574              	.LBB55:
+ 575              	.LBI47:
+ 227:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/portmacro.h **** {
+ 576              		.loc 2 227 30 view .LVU173
+ 577              	.LBB49:
+ARM GAS  C:\Users\Simon\AppData\Local\Temp\ccfMDuob.s 			page 23
+
+
+ 578              		.loc 2 229 2 view .LVU174
+ 579              		.syntax unified
+ 580              	@ 229 "Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/portmacro.h" 1
+ 581 00c6 88F31188 			msr basepri, r8	
+ 582              	@ 0 "" 2
+ 583              	.LVL40:
+ 584              		.loc 2 229 2 is_stmt 0 view .LVU175
+ 585              		.thumb
+ 586              		.syntax unified
+ 587              	.LBE49:
+ 588              	.LBE55:
+ 270:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 		}
+ 589              		.loc 1 270 4 is_stmt 1 view .LVU176
+ 270:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 		}
+ 590              		.loc 1 270 4 view .LVU177
+ 270:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 		}
+ 591              		.loc 1 270 4 view .LVU178
+ 592 00ca DBF82C30 		ldr	r3, [fp, #44]
+ 593 00ce 2268     		ldr	r2, [r4]
+ 594 00d0 03EB8300 		add	r0, r3, r3, lsl #2
+ 595 00d4 9342     		cmp	r3, r2
+ 596 00d6 05EB8000 		add	r0, r5, r0, lsl #2
+ 597 00da 88BF     		it	hi
+ 598 00dc 2360     		strhi	r3, [r4]
+ 599 00de FFF7FEFF 		bl	vListInsertEnd
+ 600              	.LVL41:
+ 270:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 		}
+ 601              		.loc 1 270 41 view .LVU179
+ 243:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 		{
+ 602              		.loc 1 243 54 view .LVU180
+ 243:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 		{
+ 603              		.loc 1 243 10 is_stmt 0 view .LVU181
+ 604 00e2 3368     		ldr	r3, [r6]
+ 605 00e4 1A68     		ldr	r2, [r3]
+ 243:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 		{
+ 606              		.loc 1 243 54 view .LVU182
+ 607 00e6 002A     		cmp	r2, #0
+ 608 00e8 3AD0     		beq	.L55
+ 274:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** }
+ 609              		.loc 1 274 17 view .LVU183
+ 610 00ea 3A68     		ldr	r2, [r7]
+ 611              	.LVL42:
+ 612              	.L31:
+ 245:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 
+ 613              		.loc 1 245 4 is_stmt 1 view .LVU184
+ 253:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 			{
+ 614              		.loc 1 253 4 view .LVU185
+ 615              	.LBB56:
+ 616              	.LBI52:
+ 191:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/portmacro.h **** {
+ 617              		.loc 2 191 30 view .LVU186
+ 618              	.LBB54:
+ 193:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/portmacro.h **** 
+ 619              		.loc 2 193 1 view .LVU187
+ 195:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/portmacro.h **** 	(
+ 620              		.loc 2 195 2 view .LVU188
+ 621              	.LBE54:
+ARM GAS  C:\Users\Simon\AppData\Local\Temp\ccfMDuob.s 			page 24
+
+
+ 622              	.LBE56:
+ 245:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 
+ 623              		.loc 1 245 11 is_stmt 0 view .LVU189
+ 624 00ec DB68     		ldr	r3, [r3, #12]
+ 625 00ee D3F80CB0 		ldr	fp, [r3, #12]
+ 626              	.LVL43:
+ 247:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 			{
+ 627              		.loc 1 247 4 is_stmt 1 view .LVU190
+ 247:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 			{
+ 628              		.loc 1 247 6 is_stmt 0 view .LVU191
+ 629 00f2 DBF80410 		ldr	r1, [fp, #4]
+ 630 00f6 9142     		cmp	r1, r2
+ 631 00f8 CED9     		bls	.L27
+ 225:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 	{
+ 632              		.loc 1 225 9 view .LVU192
+ 633 00fa D9F80000 		ldr	r0, [r9]
+ 634              	.LVL44:
+ 635              	.L26:
+ 225:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 	{
+ 636              		.loc 1 225 9 is_stmt 1 view .LVU193
+ 637 00fe 0028     		cmp	r0, #0
+ 638 0100 BFD1     		bne	.L32
+ 639              	.L33:
+ 274:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** }
+ 640              		.loc 1 274 2 view .LVU194
+ 641              	.LBE46:
+ 642              	.LBE45:
  287:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 	{
- 672              		.loc 1 287 2 view .LVU167
+ 643              		.loc 1 287 9 is_stmt 0 view .LVU195
+ 644 0102 2368     		ldr	r3, [r4]
+ 645              	.LBB62:
+ 646              	.LBB58:
+ 274:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** }
+ 647              		.loc 1 274 17 view .LVU196
+ 648 0104 2249     		ldr	r1, .L58+12
+ 649              	.LBE58:
+ 650              	.LBE62:
  287:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 	{
- 673              		.loc 1 287 7 is_stmt 0 view .LVU168
- 674 000a 02E0     		b	.L46
- 675              	.L52:
+ 651              		.loc 1 287 9 view .LVU197
+ 652 0106 9800     		lsls	r0, r3, #2
+ 653              	.LBB63:
+ 654              	.LBB59:
+ 274:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** }
+ 655              		.loc 1 274 17 view .LVU198
+ 656 0108 0A60     		str	r2, [r1]
+ 657              	.LBE59:
+ 658              	.LBE63:
+ 287:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 	{
+ 659              		.loc 1 287 9 is_stmt 1 view .LVU199
+ 660 010a 03EB8302 		add	r2, r3, r3, lsl #2
+ 661 010e 9200     		lsls	r2, r2, #2
+ 662 0110 A958     		ldr	r1, [r5, r2]
+ 663 0112 59B9     		cbnz	r1, .L34
+ 664              	.L37:
+ 289:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 		{
+ 665              		.loc 1 289 3 view .LVU200
  294:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 	}
- 676              		.loc 1 294 3 is_stmt 1 view .LVU169
- 677 000c 013B     		subs	r3, r3, #1
- 678 000e 184A     		ldr	r2, .L54
-ARM GAS  C:\Users\Simon\AppData\Local\Temp\cc1mrjTm.s 			page 25
+ARM GAS  C:\Users\Simon\AppData\Local\Temp\ccfMDuob.s 			page 25
 
 
- 679 0010 1360     		str	r3, [r2]
- 680              	.L46:
+ 666              		.loc 1 294 3 view .LVU201
+ 289:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 		{
+ 667              		.loc 1 289 5 is_stmt 0 view .LVU202
+ 668 0114 53B3     		cbz	r3, .L56
+ 294:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 	}
+ 669              		.loc 1 294 3 view .LVU203
+ 670 0116 013B     		subs	r3, r3, #1
  287:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 	{
- 681              		.loc 1 287 9 view .LVU170
- 682 0012 174B     		ldr	r3, .L54
- 683 0014 1B68     		ldr	r3, [r3]
- 684 0016 03EB8301 		add	r1, r3, r3, lsl #2
- 685 001a 8A00     		lsls	r2, r1, #2
- 686 001c 1549     		ldr	r1, .L54+4
- 687 001e 8A58     		ldr	r2, [r1, r2]
- 688 0020 12B9     		cbnz	r2, .L51
- 289:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 		{
- 689              		.loc 1 289 3 view .LVU171
- 289:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 		{
- 690              		.loc 1 289 5 is_stmt 0 view .LVU172
- 691 0022 002B     		cmp	r3, #0
- 692 0024 F2D1     		bne	.L52
- 693 0026 1AE0     		b	.L45
- 694              	.L51:
- 695              	.LBB23:
+ 671              		.loc 1 287 9 is_stmt 1 view .LVU204
+ 672 0118 0121     		movs	r1, #1
+ 673 011a 03EB8302 		add	r2, r3, r3, lsl #2
+ 294:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 	}
+ 674              		.loc 1 294 3 is_stmt 0 view .LVU205
+ 675 011e 0193     		str	r3, [sp, #4]
+ 287:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 	{
+ 676              		.loc 1 287 9 view .LVU206
+ 677 0120 9800     		lsls	r0, r3, #2
+ 678 0122 55F82220 		ldr	r2, [r5, r2, lsl #2]
+ 679 0126 002A     		cmp	r2, #0
+ 680 0128 F4D0     		beq	.L37
+ 681 012a 2360     		str	r3, [r4]
+ 682              	.L34:
+ 683              	.LBB64:
  299:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 
- 696              		.loc 1 299 2 is_stmt 1 view .LVU173
- 697              	.LVL50:
+ 684              		.loc 1 299 2 is_stmt 1 view .LVU207
+ 685              	.LVL45:
  299:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 
- 698              		.loc 1 299 2 view .LVU174
- 699 0028 03EB8300 		add	r0, r3, r3, lsl #2
- 700 002c 8200     		lsls	r2, r0, #2
- 701 002e 0A44     		add	r2, r2, r1
- 702 0030 5068     		ldr	r0, [r2, #4]
- 703 0032 4068     		ldr	r0, [r0, #4]
- 704 0034 5060     		str	r0, [r2, #4]
+ 686              		.loc 1 299 2 view .LVU208
+ 687 012c 1844     		add	r0, r0, r3
+ 688 012e 05EB8001 		add	r1, r5, r0, lsl #2
+ 689 0132 4A68     		ldr	r2, [r1, #4]
+ 690 0134 0B46     		mov	r3, r1
+ 691              	.LVL46:
  299:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 
- 705              		.loc 1 299 2 view .LVU175
- 706 0036 03EB830C 		add	ip, r3, r3, lsl #2
- 707 003a 4FEA8C02 		lsl	r2, ip, #2
- 708 003e 0832     		adds	r2, r2, #8
- 709 0040 1144     		add	r1, r1, r2
- 710 0042 8842     		cmp	r0, r1
- 711 0044 0CD0     		beq	.L53
- 712              	.L49:
+ 692              		.loc 1 299 2 is_stmt 0 view .LVU209
+ 693 0136 5268     		ldr	r2, [r2, #4]
+ 694 0138 0833     		adds	r3, r3, #8
+ 695 013a 9A42     		cmp	r2, r3
+ 696 013c 4A60     		str	r2, [r1, #4]
  299:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 
- 713              		.loc 1 299 2 discriminator 3 view .LVU176
- 714 0046 03EB8303 		add	r3, r3, r3, lsl #2
- 715              	.LVL51:
+ 697              		.loc 1 299 2 is_stmt 1 view .LVU210
+ 698 013e 1BD0     		beq	.L57
+ 699              	.L38:
  299:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 
- 716              		.loc 1 299 2 is_stmt 0 discriminator 3 view .LVU177
- 717 004a 9A00     		lsls	r2, r3, #2
- 718 004c 094B     		ldr	r3, .L54+4
- 719 004e 1344     		add	r3, r3, r2
- 720 0050 5B68     		ldr	r3, [r3, #4]
- 721 0052 D868     		ldr	r0, [r3, #12]
- 722 0054 084B     		ldr	r3, .L54+8
- 723 0056 1860     		str	r0, [r3]
- 724              	.LBE23:
- 299:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 
- 725              		.loc 1 299 110 is_stmt 1 discriminator 3 view .LVU178
+ 700              		.loc 1 299 2 discriminator 3 view .LVU211
+ 701 0140 D068     		ldr	r0, [r2, #12]
+ 702 0142 164A     		ldr	r2, .L58+24
+ 703              	.LBE64:
  302:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 
-ARM GAS  C:\Users\Simon\AppData\Local\Temp\cc1mrjTm.s 			page 26
+ 704              		.loc 1 302 22 is_stmt 0 discriminator 3 view .LVU212
+ 705 0144 0368     		ldr	r3, [r0]
+ 706 0146 016B     		ldr	r1, [r0, #48]
+ 707              	.LBB65:
+ 299:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 
+ 708              		.loc 1 299 2 discriminator 3 view .LVU213
+ 709 0148 1060     		str	r0, [r2]
+ 710              	.LBE65:
+ARM GAS  C:\Users\Simon\AppData\Local\Temp\ccfMDuob.s 			page 26
 
 
- 726              		.loc 1 302 2 discriminator 3 view .LVU179
+ 299:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 
+ 711              		.loc 1 299 110 is_stmt 1 discriminator 3 view .LVU214
  302:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 
- 727              		.loc 1 302 22 is_stmt 0 discriminator 3 view .LVU180
- 728 0058 0368     		ldr	r3, [r0]
- 729 005a 016B     		ldr	r1, [r0, #48]
- 730 005c 9847     		blx	r3
- 731              	.LVL52:
- 304:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** }
- 732              		.loc 1 304 2 is_stmt 1 discriminator 3 view .LVU181
- 733              	.L45:
+ 712              		.loc 1 302 2 discriminator 3 view .LVU215
  305:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** /*-----------------------------------------------------------*/
- 734              		.loc 1 305 1 is_stmt 0 view .LVU182
- 735 005e 08BD     		pop	{r3, pc}
- 736              	.LVL53:
- 737              	.L53:
- 738              	.LBB24:
+ 713              		.loc 1 305 1 is_stmt 0 discriminator 3 view .LVU216
+ 714 014a 03B0     		add	sp, sp, #12
+ 715              	.LCFI6:
+ 716              		.cfi_remember_state
+ 717              		.cfi_def_cfa_offset 36
+ 718              		@ sp needed
+ 719 014c BDE8F04F 		pop	{r4, r5, r6, r7, r8, r9, r10, fp, lr}
+ 720              	.LCFI7:
+ 721              		.cfi_restore 14
+ 722              		.cfi_restore 11
+ 723              		.cfi_restore 10
+ 724              		.cfi_restore 9
+ 725              		.cfi_restore 8
+ 726              		.cfi_restore 7
+ 727              		.cfi_restore 6
+ 728              		.cfi_restore 5
+ 729              		.cfi_restore 4
+ 730              		.cfi_def_cfa_offset 0
+ 302:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 
+ 731              		.loc 1 302 22 discriminator 3 view .LVU217
+ 732 0150 1847     		bx	r3	@ indirect register sibling call
+ 733              	.LVL47:
+ 734              	.L24:
+ 735              	.LCFI8:
+ 736              		.cfi_restore_state
+ 737              	.LBB66:
+ 738              	.LBB60:
+ 739              	.LBB57:
+ 233:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 
+ 740              		.loc 1 233 4 is_stmt 1 view .LVU218
+ 237:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 			pxDelayedCoRoutineList = pxOverflowDelayedCoRoutineList;
+ 741              		.loc 1 237 4 view .LVU219
+ 237:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 			pxDelayedCoRoutineList = pxOverflowDelayedCoRoutineList;
+ 742              		.loc 1 237 11 is_stmt 0 view .LVU220
+ 743 0152 3168     		ldr	r1, [r6]
+ 744              	.LVL48:
+ 238:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 			pxOverflowDelayedCoRoutineList = pxTemp;
+ 745              		.loc 1 238 4 is_stmt 1 view .LVU221
+ 238:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 			pxOverflowDelayedCoRoutineList = pxTemp;
+ 746              		.loc 1 238 27 is_stmt 0 view .LVU222
+ 747 0154 DAF80030 		ldr	r3, [r10]
+ 239:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 		}
+ 748              		.loc 1 239 35 view .LVU223
+ 749 0158 CAF80010 		str	r1, [r10]
+ 238:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 			pxOverflowDelayedCoRoutineList = pxTemp;
+ 750              		.loc 1 238 27 view .LVU224
+ 751 015c 3360     		str	r3, [r6]
+ 239:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 		}
+ 752              		.loc 1 239 4 is_stmt 1 view .LVU225
+ 753 015e 98E7     		b	.L25
+ 754              	.LVL49:
+ 755              	.L55:
+ARM GAS  C:\Users\Simon\AppData\Local\Temp\ccfMDuob.s 			page 27
+
+
+ 239:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 		}
+ 756              		.loc 1 239 4 is_stmt 0 view .LVU226
+ 757              	.LBE57:
+ 225:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 	{
+ 758              		.loc 1 225 9 view .LVU227
+ 759 0160 D9F80000 		ldr	r0, [r9]
+ 274:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** }
+ 760              		.loc 1 274 17 view .LVU228
+ 761 0164 3A68     		ldr	r2, [r7]
+ 225:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 	{
+ 762              		.loc 1 225 9 is_stmt 1 view .LVU229
+ 763 0166 0028     		cmp	r0, #0
+ 764 0168 8BD1     		bne	.L32
+ 765 016a CAE7     		b	.L33
+ 766              	.LVL50:
+ 767              	.L56:
+ 225:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 	{
+ 768              		.loc 1 225 9 is_stmt 0 view .LVU230
+ 769 016c 09B1     		cbz	r1, .L18
+ 770 016e 019B     		ldr	r3, [sp, #4]
+ 771 0170 2360     		str	r3, [r4]
+ 772              	.L18:
+ 773              	.LBE60:
+ 774              	.LBE66:
+ 305:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** /*-----------------------------------------------------------*/
+ 775              		.loc 1 305 1 view .LVU231
+ 776 0172 03B0     		add	sp, sp, #12
+ 777              	.LCFI9:
+ 778              		.cfi_remember_state
+ 779              		.cfi_def_cfa_offset 36
+ 780              		@ sp needed
+ 781 0174 BDE8F08F 		pop	{r4, r5, r6, r7, r8, r9, r10, fp, pc}
+ 782              	.L57:
+ 783              	.LCFI10:
+ 784              		.cfi_restore_state
+ 785              	.LBB67:
  299:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 
- 739              		.loc 1 299 2 is_stmt 1 discriminator 1 view .LVU183
- 740 0060 4068     		ldr	r0, [r0, #4]
- 741 0062 6246     		mov	r2, ip
- 742 0064 9100     		lsls	r1, r2, #2
- 743 0066 034A     		ldr	r2, .L54+4
- 744 0068 0A44     		add	r2, r2, r1
- 745 006a 5060     		str	r0, [r2, #4]
- 746 006c EBE7     		b	.L49
- 747              	.L55:
- 748 006e 00BF     		.align	2
- 749              	.L54:
- 750 0070 00000000 		.word	.LANCHOR6
- 751 0074 00000000 		.word	.LANCHOR0
- 752 0078 00000000 		.word	.LANCHOR10
- 753              	.LBE24:
- 754              		.cfi_endproc
- 755              	.LFE8:
- 757              		.section	.text.xCoRoutineRemoveFromEventList,"ax",%progbits
- 758              		.align	1
- 759              		.global	xCoRoutineRemoveFromEventList
- 760              		.syntax unified
- 761              		.thumb
- 762              		.thumb_func
- 764              	xCoRoutineRemoveFromEventList:
- 765              	.LVL54:
- 766              	.LFB10:
+ 786              		.loc 1 299 2 is_stmt 1 discriminator 1 view .LVU232
+ 787 0178 5268     		ldr	r2, [r2, #4]
+ 788 017a 4A60     		str	r2, [r1, #4]
+ 789 017c E0E7     		b	.L38
+ 790              	.L54:
+ 299:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 
+ 791              		.loc 1 299 2 is_stmt 0 discriminator 1 view .LVU233
+ 792              	.LBE67:
+ 793              	.LBB68:
+ 794              	.LBB61:
+ 274:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** }
+ 795              		.loc 1 274 17 view .LVU234
+ 796 017e 054B     		ldr	r3, .L58+16
+ 797 0180 1A68     		ldr	r2, [r3]
+ 798 0182 BEE7     		b	.L33
+ 799              	.L59:
+ 800              		.align	2
+ 801              	.L58:
+ 802 0184 00000000 		.word	.LANCHOR4
+ 803 0188 00000000 		.word	.LANCHOR7
+ARM GAS  C:\Users\Simon\AppData\Local\Temp\ccfMDuob.s 			page 28
+
+
+ 804 018c 00000000 		.word	.LANCHOR1
+ 805 0190 00000000 		.word	.LANCHOR9
+ 806 0194 00000000 		.word	.LANCHOR8
+ 807 0198 00000000 		.word	.LANCHOR5
+ 808 019c 00000000 		.word	.LANCHOR0
+ 809 01a0 00000000 		.word	.LANCHOR10
+ 810 01a4 00000000 		.word	.LANCHOR6
+ 811              	.LBE61:
+ 812              	.LBE68:
+ 813              		.cfi_endproc
+ 814              	.LFE8:
+ 816              		.section	.text.xCoRoutineRemoveFromEventList,"ax",%progbits
+ 817              		.align	1
+ 818              		.p2align 2,,3
+ 819              		.global	xCoRoutineRemoveFromEventList
+ 820              		.syntax unified
+ 821              		.thumb
+ 822              		.thumb_func
+ 824              	xCoRoutineRemoveFromEventList:
+ 825              	.LVL51:
+ 826              	.LFB10:
  326:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** /*-----------------------------------------------------------*/
  327:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 
  328:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** BaseType_t xCoRoutineRemoveFromEventList( const List_t *pxEventList )
  329:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** {
- 767              		.loc 1 329 1 view -0
- 768              		.cfi_startproc
- 769              		@ args = 0, pretend = 0, frame = 0
- 770              		@ frame_needed = 0, uses_anonymous_args = 0
- 771              		.loc 1 329 1 is_stmt 0 view .LVU185
- 772 0000 38B5     		push	{r3, r4, r5, lr}
- 773              	.LCFI6:
- 774              		.cfi_def_cfa_offset 16
- 775              		.cfi_offset 3, -16
- 776              		.cfi_offset 4, -12
-ARM GAS  C:\Users\Simon\AppData\Local\Temp\cc1mrjTm.s 			page 27
-
-
- 777              		.cfi_offset 5, -8
- 778              		.cfi_offset 14, -4
+ 827              		.loc 1 329 1 is_stmt 1 view -0
+ 828              		.cfi_startproc
+ 829              		@ args = 0, pretend = 0, frame = 8
+ 830              		@ frame_needed = 0, uses_anonymous_args = 0
  330:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** CRCB_t *pxUnblockedCRCB;
- 779              		.loc 1 330 1 is_stmt 1 view .LVU186
+ 831              		.loc 1 330 1 view .LVU236
  331:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** BaseType_t xReturn;
- 780              		.loc 1 331 1 view .LVU187
+ 832              		.loc 1 331 1 view .LVU237
  332:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 
  333:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 	/* This function is called from within an interrupt.  It can only access
  334:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 	event lists and the pending ready list.  This function assumes that a
  335:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 	check has already been made to ensure pxEventList is not empty. */
  336:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 	pxUnblockedCRCB = ( CRCB_t * ) listGET_OWNER_OF_HEAD_ENTRY( pxEventList );
- 781              		.loc 1 336 2 view .LVU188
- 782              		.loc 1 336 33 is_stmt 0 view .LVU189
- 783 0002 C368     		ldr	r3, [r0, #12]
- 784              		.loc 1 336 18 view .LVU190
- 785 0004 DC68     		ldr	r4, [r3, #12]
- 786              	.LVL55:
+ 833              		.loc 1 336 2 view .LVU238
+ 834              		.loc 1 336 18 is_stmt 0 view .LVU239
+ 835 0000 C368     		ldr	r3, [r0, #12]
+ 329:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** CRCB_t *pxUnblockedCRCB;
+ 836              		.loc 1 329 1 view .LVU240
+ 837 0002 10B5     		push	{r4, lr}
+ 838              	.LCFI11:
+ 839              		.cfi_def_cfa_offset 8
+ 840              		.cfi_offset 4, -8
+ 841              		.cfi_offset 14, -4
+ 842              		.loc 1 336 18 view .LVU241
+ 843 0004 DC68     		ldr	r4, [r3, #12]
+ 844              	.LVL52:
  337:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 	( void ) uxListRemove( &( pxUnblockedCRCB->xEventListItem ) );
- 787              		.loc 1 337 2 is_stmt 1 view .LVU191
- 788              		.loc 1 337 11 is_stmt 0 view .LVU192
- 789 0006 04F11805 		add	r5, r4, #24
- 790 000a 2846     		mov	r0, r5
- 791              	.LVL56:
- 792              		.loc 1 337 11 view .LVU193
- 793 000c FFF7FEFF 		bl	uxListRemove
- 794              	.LVL57:
+ 845              		.loc 1 337 2 is_stmt 1 view .LVU242
+ 329:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** CRCB_t *pxUnblockedCRCB;
+ 846              		.loc 1 329 1 is_stmt 0 view .LVU243
+ 847 0006 82B0     		sub	sp, sp, #8
+ 848              	.LCFI12:
+ARM GAS  C:\Users\Simon\AppData\Local\Temp\ccfMDuob.s 			page 29
+
+
+ 849              		.cfi_def_cfa_offset 16
+ 850              		.loc 1 337 11 view .LVU244
+ 851 0008 04F11801 		add	r1, r4, #24
+ 852 000c 0846     		mov	r0, r1
+ 853              	.LVL53:
+ 854              		.loc 1 337 11 view .LVU245
+ 855 000e 0191     		str	r1, [sp, #4]
+ 856 0010 FFF7FEFF 		bl	uxListRemove
+ 857              	.LVL54:
  338:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 	vListInsertEnd( ( List_t * ) &( xPendingReadyCoRoutineList ), &( pxUnblockedCRCB->xEventListItem )
- 795              		.loc 1 338 2 is_stmt 1 view .LVU194
- 796 0010 2946     		mov	r1, r5
- 797 0012 0648     		ldr	r0, .L60
- 798 0014 FFF7FEFF 		bl	vListInsertEnd
- 799              	.LVL58:
+ 858              		.loc 1 338 2 is_stmt 1 view .LVU246
+ 859 0014 0199     		ldr	r1, [sp, #4]
+ 860 0016 0648     		ldr	r0, .L62
+ 861 0018 FFF7FEFF 		bl	vListInsertEnd
+ 862              	.LVL55:
  339:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 
  340:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 	if( pxUnblockedCRCB->uxPriority >= pxCurrentCoRoutine->uxPriority )
- 800              		.loc 1 340 2 view .LVU195
- 801              		.loc 1 340 21 is_stmt 0 view .LVU196
- 802 0018 E26A     		ldr	r2, [r4, #44]
- 803              		.loc 1 340 55 view .LVU197
- 804 001a 054B     		ldr	r3, .L60+4
- 805 001c 1B68     		ldr	r3, [r3]
- 806 001e DB6A     		ldr	r3, [r3, #44]
- 807              		.loc 1 340 4 view .LVU198
- 808 0020 9A42     		cmp	r2, r3
- 809 0022 01D3     		bcc	.L58
+ 863              		.loc 1 340 2 view .LVU247
  341:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 	{
  342:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 		xReturn = pdTRUE;
- 810              		.loc 1 342 11 view .LVU199
- 811 0024 0120     		movs	r0, #1
- 812              	.L56:
  343:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 	}
  344:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 	else
  345:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 	{
@@ -1617,168 +1708,171 @@ ARM GAS  C:\Users\Simon\AppData\Local\Temp\cc1mrjTm.s 			page 1
  347:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 	}
  348:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 
  349:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 	return xReturn;
+ 864              		.loc 1 349 2 view .LVU248
+ 340:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 	{
+ 865              		.loc 1 340 55 is_stmt 0 view .LVU249
+ 866 001c 054B     		ldr	r3, .L62+4
+ 340:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 	{
+ 867              		.loc 1 340 4 view .LVU250
+ 868 001e E06A     		ldr	r0, [r4, #44]
+ 340:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 	{
+ 869              		.loc 1 340 55 view .LVU251
+ 870 0020 1B68     		ldr	r3, [r3]
+ 340:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 	{
+ 871              		.loc 1 340 4 view .LVU252
+ 872 0022 DB6A     		ldr	r3, [r3, #44]
  350:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** }
-ARM GAS  C:\Users\Simon\AppData\Local\Temp\cc1mrjTm.s 			page 28
+ 873              		.loc 1 350 1 view .LVU253
+ 874 0024 9842     		cmp	r0, r3
+ 875 0026 34BF     		ite	cc
+ 876 0028 0020     		movcc	r0, #0
+ 877 002a 0120     		movcs	r0, #1
+ 878 002c 02B0     		add	sp, sp, #8
+ 879              	.LCFI13:
+ 880              		.cfi_def_cfa_offset 8
+ 881              		@ sp needed
+ 882 002e 10BD     		pop	{r4, pc}
+ 883              	.LVL56:
+ 884              	.L63:
+ 885              		.loc 1 350 1 view .LVU254
+ 886              		.align	2
+ 887              	.L62:
+ 888 0030 00000000 		.word	.LANCHOR4
+ARM GAS  C:\Users\Simon\AppData\Local\Temp\ccfMDuob.s 			page 30
 
 
- 813              		.loc 1 350 1 view .LVU200
- 814 0026 38BD     		pop	{r3, r4, r5, pc}
- 815              	.LVL59:
- 816              	.L58:
- 346:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** 	}
- 817              		.loc 1 346 11 view .LVU201
- 818 0028 0020     		movs	r0, #0
- 819              	.LVL60:
- 349:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** }
- 820              		.loc 1 349 2 is_stmt 1 view .LVU202
- 349:Middlewares/Third_Party/FreeRTOS/Source/croutine.c **** }
- 821              		.loc 1 349 9 is_stmt 0 view .LVU203
- 822 002a FCE7     		b	.L56
- 823              	.L61:
- 824              		.align	2
- 825              	.L60:
- 826 002c 00000000 		.word	.LANCHOR3
- 827 0030 00000000 		.word	.LANCHOR10
- 828              		.cfi_endproc
- 829              	.LFE10:
- 831              		.global	pxCurrentCoRoutine
- 832              		.section	.bss.pxCurrentCoRoutine,"aw",%nobits
- 833              		.align	2
- 834              		.set	.LANCHOR10,. + 0
- 837              	pxCurrentCoRoutine:
- 838 0000 00000000 		.space	4
- 839              		.section	.bss.pxDelayedCoRoutineList,"aw",%nobits
- 840              		.align	2
- 841              		.set	.LANCHOR4,. + 0
- 844              	pxDelayedCoRoutineList:
- 845 0000 00000000 		.space	4
- 846              		.section	.bss.pxOverflowDelayedCoRoutineList,"aw",%nobits
- 847              		.align	2
- 848              		.set	.LANCHOR5,. + 0
- 851              	pxOverflowDelayedCoRoutineList:
- 852 0000 00000000 		.space	4
- 853              		.section	.bss.pxReadyCoRoutineLists,"aw",%nobits
- 854              		.align	2
- 855              		.set	.LANCHOR0,. + 0
- 858              	pxReadyCoRoutineLists:
- 859 0000 00000000 		.space	40
- 859      00000000 
- 859      00000000 
- 859      00000000 
- 859      00000000 
- 860              		.section	.bss.uxTopCoRoutineReadyPriority,"aw",%nobits
- 861              		.align	2
- 862              		.set	.LANCHOR6,. + 0
- 865              	uxTopCoRoutineReadyPriority:
- 866 0000 00000000 		.space	4
- 867              		.section	.bss.xCoRoutineTickCount,"aw",%nobits
- 868              		.align	2
- 869              		.set	.LANCHOR9,. + 0
- 872              	xCoRoutineTickCount:
- 873 0000 00000000 		.space	4
- 874              		.section	.bss.xDelayedCoRoutineList1,"aw",%nobits
- 875              		.align	2
-ARM GAS  C:\Users\Simon\AppData\Local\Temp\cc1mrjTm.s 			page 29
+ 889 0034 00000000 		.word	.LANCHOR0
+ 890              		.cfi_endproc
+ 891              	.LFE10:
+ 893              		.global	pxCurrentCoRoutine
+ 894              		.section	.bss.pxCurrentCoRoutine,"aw",%nobits
+ 895              		.align	2
+ 896              		.set	.LANCHOR0,. + 0
+ 899              	pxCurrentCoRoutine:
+ 900 0000 00000000 		.space	4
+ 901              		.section	.bss.pxDelayedCoRoutineList,"aw",%nobits
+ 902              		.align	2
+ 903              		.set	.LANCHOR5,. + 0
+ 906              	pxDelayedCoRoutineList:
+ 907 0000 00000000 		.space	4
+ 908              		.section	.bss.pxOverflowDelayedCoRoutineList,"aw",%nobits
+ 909              		.align	2
+ 910              		.set	.LANCHOR6,. + 0
+ 913              	pxOverflowDelayedCoRoutineList:
+ 914 0000 00000000 		.space	4
+ 915              		.section	.bss.pxReadyCoRoutineLists,"aw",%nobits
+ 916              		.align	2
+ 917              		.set	.LANCHOR1,. + 0
+ 920              	pxReadyCoRoutineLists:
+ 921 0000 00000000 		.space	40
+ 921      00000000 
+ 921      00000000 
+ 921      00000000 
+ 921      00000000 
+ 922              		.section	.bss.uxTopCoRoutineReadyPriority,"aw",%nobits
+ 923              		.align	2
+ 924              		.set	.LANCHOR7,. + 0
+ 927              	uxTopCoRoutineReadyPriority:
+ 928 0000 00000000 		.space	4
+ 929              		.section	.bss.xCoRoutineTickCount,"aw",%nobits
+ 930              		.align	2
+ 931              		.set	.LANCHOR8,. + 0
+ 934              	xCoRoutineTickCount:
+ 935 0000 00000000 		.space	4
+ 936              		.section	.bss.xDelayedCoRoutineList1,"aw",%nobits
+ 937              		.align	2
+ 938              		.set	.LANCHOR2,. + 0
+ 941              	xDelayedCoRoutineList1:
+ 942 0000 00000000 		.space	20
+ 942      00000000 
+ 942      00000000 
+ 942      00000000 
+ 942      00000000 
+ 943              		.section	.bss.xDelayedCoRoutineList2,"aw",%nobits
+ 944              		.align	2
+ 945              		.set	.LANCHOR3,. + 0
+ 948              	xDelayedCoRoutineList2:
+ 949 0000 00000000 		.space	20
+ 949      00000000 
+ 949      00000000 
+ 949      00000000 
+ 949      00000000 
+ 950              		.section	.bss.xLastTickCount,"aw",%nobits
+ARM GAS  C:\Users\Simon\AppData\Local\Temp\ccfMDuob.s 			page 31
 
 
- 876              		.set	.LANCHOR1,. + 0
- 879              	xDelayedCoRoutineList1:
- 880 0000 00000000 		.space	20
- 880      00000000 
- 880      00000000 
- 880      00000000 
- 880      00000000 
- 881              		.section	.bss.xDelayedCoRoutineList2,"aw",%nobits
- 882              		.align	2
- 883              		.set	.LANCHOR2,. + 0
- 886              	xDelayedCoRoutineList2:
- 887 0000 00000000 		.space	20
- 887      00000000 
- 887      00000000 
- 887      00000000 
- 887      00000000 
- 888              		.section	.bss.xLastTickCount,"aw",%nobits
- 889              		.align	2
- 890              		.set	.LANCHOR7,. + 0
- 893              	xLastTickCount:
- 894 0000 00000000 		.space	4
- 895              		.section	.bss.xPassedTicks,"aw",%nobits
- 896              		.align	2
- 897              		.set	.LANCHOR8,. + 0
- 900              	xPassedTicks:
- 901 0000 00000000 		.space	4
- 902              		.section	.bss.xPendingReadyCoRoutineList,"aw",%nobits
- 903              		.align	2
- 904              		.set	.LANCHOR3,. + 0
- 907              	xPendingReadyCoRoutineList:
- 908 0000 00000000 		.space	20
- 908      00000000 
- 908      00000000 
- 908      00000000 
- 908      00000000 
- 909              		.text
- 910              	.Letext0:
- 911              		.file 3 "c:\\program files (x86)\\arm gnu toolchain arm-none-eabi\\11.2 2022.02\\lib\\gcc\\arm-non
- 912              		.file 4 "c:\\program files (x86)\\arm gnu toolchain arm-none-eabi\\11.2 2022.02\\arm-none-eabi\\in
- 913              		.file 5 "c:\\program files (x86)\\arm gnu toolchain arm-none-eabi\\11.2 2022.02\\arm-none-eabi\\in
- 914              		.file 6 "Middlewares/Third_Party/FreeRTOS/Source/include/list.h"
- 915              		.file 7 "Middlewares/Third_Party/FreeRTOS/Source/include/croutine.h"
- 916              		.file 8 "Middlewares/Third_Party/FreeRTOS/Source/include/portable.h"
- 917              		.file 9 "Middlewares/Third_Party/FreeRTOS/Source/include/task.h"
-ARM GAS  C:\Users\Simon\AppData\Local\Temp\cc1mrjTm.s 			page 30
+ 951              		.align	2
+ 952              		.set	.LANCHOR9,. + 0
+ 955              	xLastTickCount:
+ 956 0000 00000000 		.space	4
+ 957              		.section	.bss.xPassedTicks,"aw",%nobits
+ 958              		.align	2
+ 959              		.set	.LANCHOR10,. + 0
+ 962              	xPassedTicks:
+ 963 0000 00000000 		.space	4
+ 964              		.section	.bss.xPendingReadyCoRoutineList,"aw",%nobits
+ 965              		.align	2
+ 966              		.set	.LANCHOR4,. + 0
+ 969              	xPendingReadyCoRoutineList:
+ 970 0000 00000000 		.space	20
+ 970      00000000 
+ 970      00000000 
+ 970      00000000 
+ 970      00000000 
+ 971              		.text
+ 972              	.Letext0:
+ 973              		.file 3 "c:\\program files (x86)\\arm gnu toolchain arm-none-eabi\\11.2 2022.02\\lib\\gcc\\arm-non
+ 974              		.file 4 "c:\\program files (x86)\\arm gnu toolchain arm-none-eabi\\11.2 2022.02\\arm-none-eabi\\in
+ 975              		.file 5 "c:\\program files (x86)\\arm gnu toolchain arm-none-eabi\\11.2 2022.02\\arm-none-eabi\\in
+ 976              		.file 6 "Middlewares/Third_Party/FreeRTOS/Source/include/list.h"
+ 977              		.file 7 "Middlewares/Third_Party/FreeRTOS/Source/include/croutine.h"
+ 978              		.file 8 "Middlewares/Third_Party/FreeRTOS/Source/include/portable.h"
+ 979              		.file 9 "Middlewares/Third_Party/FreeRTOS/Source/include/task.h"
+ARM GAS  C:\Users\Simon\AppData\Local\Temp\ccfMDuob.s 			page 32
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 croutine.c
-C:\Users\Simon\AppData\Local\Temp\cc1mrjTm.s:19     .text.prvInitialiseCoRoutineLists:00000000 $t
-C:\Users\Simon\AppData\Local\Temp\cc1mrjTm.s:24     .text.prvInitialiseCoRoutineLists:00000000 prvInitialiseCoRoutineLists
-C:\Users\Simon\AppData\Local\Temp\cc1mrjTm.s:90     .text.prvInitialiseCoRoutineLists:0000003c $d
-C:\Users\Simon\AppData\Local\Temp\cc1mrjTm.s:100    .text.prvCheckPendingReadyList:00000000 $t
-C:\Users\Simon\AppData\Local\Temp\cc1mrjTm.s:105    .text.prvCheckPendingReadyList:00000000 prvCheckPendingReadyList
-C:\Users\Simon\AppData\Local\Temp\cc1mrjTm.s:217    .text.prvCheckPendingReadyList:00000058 $d
-C:\Users\Simon\AppData\Local\Temp\cc1mrjTm.s:224    .text.prvCheckDelayedList:00000000 $t
-C:\Users\Simon\AppData\Local\Temp\cc1mrjTm.s:229    .text.prvCheckDelayedList:00000000 prvCheckDelayedList
-C:\Users\Simon\AppData\Local\Temp\cc1mrjTm.s:403    .text.prvCheckDelayedList:000000a4 $d
-C:\Users\Simon\AppData\Local\Temp\cc1mrjTm.s:414    .text.xCoRoutineCreate:00000000 $t
-C:\Users\Simon\AppData\Local\Temp\cc1mrjTm.s:420    .text.xCoRoutineCreate:00000000 xCoRoutineCreate
-C:\Users\Simon\AppData\Local\Temp\cc1mrjTm.s:550    .text.xCoRoutineCreate:00000078 $d
-C:\Users\Simon\AppData\Local\Temp\cc1mrjTm.s:557    .text.vCoRoutineAddToDelayedList:00000000 $t
-C:\Users\Simon\AppData\Local\Temp\cc1mrjTm.s:563    .text.vCoRoutineAddToDelayedList:00000000 vCoRoutineAddToDelayedList
-C:\Users\Simon\AppData\Local\Temp\cc1mrjTm.s:641    .text.vCoRoutineAddToDelayedList:00000044 $d
-C:\Users\Simon\AppData\Local\Temp\cc1mrjTm.s:649    .text.vCoRoutineSchedule:00000000 $t
-C:\Users\Simon\AppData\Local\Temp\cc1mrjTm.s:655    .text.vCoRoutineSchedule:00000000 vCoRoutineSchedule
-C:\Users\Simon\AppData\Local\Temp\cc1mrjTm.s:750    .text.vCoRoutineSchedule:00000070 $d
-C:\Users\Simon\AppData\Local\Temp\cc1mrjTm.s:758    .text.xCoRoutineRemoveFromEventList:00000000 $t
-C:\Users\Simon\AppData\Local\Temp\cc1mrjTm.s:764    .text.xCoRoutineRemoveFromEventList:00000000 xCoRoutineRemoveFromEventList
-C:\Users\Simon\AppData\Local\Temp\cc1mrjTm.s:826    .text.xCoRoutineRemoveFromEventList:0000002c $d
-C:\Users\Simon\AppData\Local\Temp\cc1mrjTm.s:837    .bss.pxCurrentCoRoutine:00000000 pxCurrentCoRoutine
-C:\Users\Simon\AppData\Local\Temp\cc1mrjTm.s:833    .bss.pxCurrentCoRoutine:00000000 $d
-C:\Users\Simon\AppData\Local\Temp\cc1mrjTm.s:840    .bss.pxDelayedCoRoutineList:00000000 $d
-C:\Users\Simon\AppData\Local\Temp\cc1mrjTm.s:844    .bss.pxDelayedCoRoutineList:00000000 pxDelayedCoRoutineList
-C:\Users\Simon\AppData\Local\Temp\cc1mrjTm.s:847    .bss.pxOverflowDelayedCoRoutineList:00000000 $d
-C:\Users\Simon\AppData\Local\Temp\cc1mrjTm.s:851    .bss.pxOverflowDelayedCoRoutineList:00000000 pxOverflowDelayedCoRoutineList
-C:\Users\Simon\AppData\Local\Temp\cc1mrjTm.s:854    .bss.pxReadyCoRoutineLists:00000000 $d
-C:\Users\Simon\AppData\Local\Temp\cc1mrjTm.s:858    .bss.pxReadyCoRoutineLists:00000000 pxReadyCoRoutineLists
-C:\Users\Simon\AppData\Local\Temp\cc1mrjTm.s:861    .bss.uxTopCoRoutineReadyPriority:00000000 $d
-C:\Users\Simon\AppData\Local\Temp\cc1mrjTm.s:865    .bss.uxTopCoRoutineReadyPriority:00000000 uxTopCoRoutineReadyPriority
-C:\Users\Simon\AppData\Local\Temp\cc1mrjTm.s:868    .bss.xCoRoutineTickCount:00000000 $d
-C:\Users\Simon\AppData\Local\Temp\cc1mrjTm.s:872    .bss.xCoRoutineTickCount:00000000 xCoRoutineTickCount
-C:\Users\Simon\AppData\Local\Temp\cc1mrjTm.s:875    .bss.xDelayedCoRoutineList1:00000000 $d
-C:\Users\Simon\AppData\Local\Temp\cc1mrjTm.s:879    .bss.xDelayedCoRoutineList1:00000000 xDelayedCoRoutineList1
-C:\Users\Simon\AppData\Local\Temp\cc1mrjTm.s:882    .bss.xDelayedCoRoutineList2:00000000 $d
-C:\Users\Simon\AppData\Local\Temp\cc1mrjTm.s:886    .bss.xDelayedCoRoutineList2:00000000 xDelayedCoRoutineList2
-C:\Users\Simon\AppData\Local\Temp\cc1mrjTm.s:889    .bss.xLastTickCount:00000000 $d
-C:\Users\Simon\AppData\Local\Temp\cc1mrjTm.s:893    .bss.xLastTickCount:00000000 xLastTickCount
-C:\Users\Simon\AppData\Local\Temp\cc1mrjTm.s:896    .bss.xPassedTicks:00000000 $d
-C:\Users\Simon\AppData\Local\Temp\cc1mrjTm.s:900    .bss.xPassedTicks:00000000 xPassedTicks
-C:\Users\Simon\AppData\Local\Temp\cc1mrjTm.s:903    .bss.xPendingReadyCoRoutineList:00000000 $d
-C:\Users\Simon\AppData\Local\Temp\cc1mrjTm.s:907    .bss.xPendingReadyCoRoutineList:00000000 xPendingReadyCoRoutineList
+C:\Users\Simon\AppData\Local\Temp\ccfMDuob.s:19     .text.xCoRoutineCreate:00000000 $t
+C:\Users\Simon\AppData\Local\Temp\ccfMDuob.s:26     .text.xCoRoutineCreate:00000000 xCoRoutineCreate
+C:\Users\Simon\AppData\Local\Temp\ccfMDuob.s:205    .text.xCoRoutineCreate:000000a8 $d
+C:\Users\Simon\AppData\Local\Temp\ccfMDuob.s:220    .text.vCoRoutineAddToDelayedList:00000000 $t
+C:\Users\Simon\AppData\Local\Temp\ccfMDuob.s:227    .text.vCoRoutineAddToDelayedList:00000000 vCoRoutineAddToDelayedList
+C:\Users\Simon\AppData\Local\Temp\ccfMDuob.s:317    .text.vCoRoutineAddToDelayedList:00000040 $d
+C:\Users\Simon\AppData\Local\Temp\ccfMDuob.s:325    .text.vCoRoutineSchedule:00000000 $t
+C:\Users\Simon\AppData\Local\Temp\ccfMDuob.s:332    .text.vCoRoutineSchedule:00000000 vCoRoutineSchedule
+C:\Users\Simon\AppData\Local\Temp\ccfMDuob.s:802    .text.vCoRoutineSchedule:00000184 $d
+C:\Users\Simon\AppData\Local\Temp\ccfMDuob.s:817    .text.xCoRoutineRemoveFromEventList:00000000 $t
+C:\Users\Simon\AppData\Local\Temp\ccfMDuob.s:824    .text.xCoRoutineRemoveFromEventList:00000000 xCoRoutineRemoveFromEventList
+C:\Users\Simon\AppData\Local\Temp\ccfMDuob.s:888    .text.xCoRoutineRemoveFromEventList:00000030 $d
+C:\Users\Simon\AppData\Local\Temp\ccfMDuob.s:899    .bss.pxCurrentCoRoutine:00000000 pxCurrentCoRoutine
+C:\Users\Simon\AppData\Local\Temp\ccfMDuob.s:895    .bss.pxCurrentCoRoutine:00000000 $d
+C:\Users\Simon\AppData\Local\Temp\ccfMDuob.s:902    .bss.pxDelayedCoRoutineList:00000000 $d
+C:\Users\Simon\AppData\Local\Temp\ccfMDuob.s:906    .bss.pxDelayedCoRoutineList:00000000 pxDelayedCoRoutineList
+C:\Users\Simon\AppData\Local\Temp\ccfMDuob.s:909    .bss.pxOverflowDelayedCoRoutineList:00000000 $d
+C:\Users\Simon\AppData\Local\Temp\ccfMDuob.s:913    .bss.pxOverflowDelayedCoRoutineList:00000000 pxOverflowDelayedCoRoutineList
+C:\Users\Simon\AppData\Local\Temp\ccfMDuob.s:916    .bss.pxReadyCoRoutineLists:00000000 $d
+C:\Users\Simon\AppData\Local\Temp\ccfMDuob.s:920    .bss.pxReadyCoRoutineLists:00000000 pxReadyCoRoutineLists
+C:\Users\Simon\AppData\Local\Temp\ccfMDuob.s:923    .bss.uxTopCoRoutineReadyPriority:00000000 $d
+C:\Users\Simon\AppData\Local\Temp\ccfMDuob.s:927    .bss.uxTopCoRoutineReadyPriority:00000000 uxTopCoRoutineReadyPriority
+C:\Users\Simon\AppData\Local\Temp\ccfMDuob.s:930    .bss.xCoRoutineTickCount:00000000 $d
+C:\Users\Simon\AppData\Local\Temp\ccfMDuob.s:934    .bss.xCoRoutineTickCount:00000000 xCoRoutineTickCount
+C:\Users\Simon\AppData\Local\Temp\ccfMDuob.s:937    .bss.xDelayedCoRoutineList1:00000000 $d
+C:\Users\Simon\AppData\Local\Temp\ccfMDuob.s:941    .bss.xDelayedCoRoutineList1:00000000 xDelayedCoRoutineList1
+C:\Users\Simon\AppData\Local\Temp\ccfMDuob.s:944    .bss.xDelayedCoRoutineList2:00000000 $d
+C:\Users\Simon\AppData\Local\Temp\ccfMDuob.s:948    .bss.xDelayedCoRoutineList2:00000000 xDelayedCoRoutineList2
+C:\Users\Simon\AppData\Local\Temp\ccfMDuob.s:951    .bss.xLastTickCount:00000000 $d
+C:\Users\Simon\AppData\Local\Temp\ccfMDuob.s:955    .bss.xLastTickCount:00000000 xLastTickCount
+C:\Users\Simon\AppData\Local\Temp\ccfMDuob.s:958    .bss.xPassedTicks:00000000 $d
+C:\Users\Simon\AppData\Local\Temp\ccfMDuob.s:962    .bss.xPassedTicks:00000000 xPassedTicks
+C:\Users\Simon\AppData\Local\Temp\ccfMDuob.s:965    .bss.xPendingReadyCoRoutineList:00000000 $d
+C:\Users\Simon\AppData\Local\Temp\ccfMDuob.s:969    .bss.xPendingReadyCoRoutineList:00000000 xPendingReadyCoRoutineList
 
 UNDEFINED SYMBOLS
-vListInitialise
-vListInsertEnd
-uxListRemove
-xTaskGetTickCount
 pvPortMalloc
 vListInitialiseItem
+vListInsertEnd
+vListInitialise
+uxListRemove
 vListInsert
+xTaskGetTickCount

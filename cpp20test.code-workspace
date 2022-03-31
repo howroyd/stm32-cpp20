@@ -1,0 +1,12 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"cortex-debug.armToolchainPath": "C:\\Program Files (x86)\\Arm GNU Toolchain arm-none-eabi\\11.2 2022.02\\bin",
+		"cortex-debug.openocdPath": "",
+		"stm32-for-vscode.openOCDPath": false
+	}
+}
