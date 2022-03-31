@@ -1,0 +1,470 @@
+ARM GAS  C:\Users\Simon\AppData\Local\Temp\ccriUYUj.s 			page 1
+
+
+   1              		.cpu cortex-m7
+   2              		.arch armv7e-m
+   3              		.fpu fpv5-d16
+   4              		.eabi_attribute 28, 1
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 1
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.file	"main.cpp"
+  15              		.text
+  16              		.section	.text._ZL10MPU_Configv,"ax",%progbits
+  17              		.align	1
+  18              		.syntax unified
+  19              		.thumb
+  20              		.thumb_func
+  22              	_ZL10MPU_Configv:
+  23              		.fnstart
+  24              	.LFB4732:
+  25              		@ args = 0, pretend = 0, frame = 16
+  26              		@ frame_needed = 0, uses_anonymous_args = 0
+  27 0000 10B5     		push	{r4, lr}
+  28              		.save {r4, lr}
+  29              		.pad #16
+  30 0002 84B0     		sub	sp, sp, #16
+  31 0004 0024     		movs	r4, #0
+  32 0006 0094     		str	r4, [sp]
+  33 0008 0194     		str	r4, [sp, #4]
+  34 000a 0294     		str	r4, [sp, #8]
+  35 000c 0394     		str	r4, [sp, #12]
+  36 000e FFF7FEFF 		bl	HAL_MPU_Disable
+  37 0012 0123     		movs	r3, #1
+  38 0014 8DF80030 		strb	r3, [sp]
+  39 0018 8DF80140 		strb	r4, [sp, #1]
+  40 001c 0194     		str	r4, [sp, #4]
+  41 001e 1F22     		movs	r2, #31
+  42 0020 8DF80820 		strb	r2, [sp, #8]
+  43 0024 8722     		movs	r2, #135
+  44 0026 8DF80920 		strb	r2, [sp, #9]
+  45 002a 8DF80A40 		strb	r4, [sp, #10]
+  46 002e 8DF80B40 		strb	r4, [sp, #11]
+  47 0032 8DF80C30 		strb	r3, [sp, #12]
+  48 0036 8DF80D30 		strb	r3, [sp, #13]
+  49 003a 8DF80E40 		strb	r4, [sp, #14]
+  50 003e 8DF80F40 		strb	r4, [sp, #15]
+  51 0042 6846     		mov	r0, sp
+  52 0044 FFF7FEFF 		bl	HAL_MPU_ConfigRegion
+  53 0048 0420     		movs	r0, #4
+  54 004a FFF7FEFF 		bl	HAL_MPU_Enable
+  55 004e 04B0     		add	sp, sp, #16
+  56              		@ sp needed
+  57 0050 10BD     		pop	{r4, pc}
+  58              		.fnend
+ARM GAS  C:\Users\Simon\AppData\Local\Temp\ccriUYUj.s 			page 2
+
+
+  60              		.section	.text._Z41__static_initialization_and_destruction_0ii,"ax",%progbits
+  61              		.align	1
+  62              		.syntax unified
+  63              		.thumb
+  64              		.thumb_func
+  66              	_Z41__static_initialization_and_destruction_0ii:
+  67              		.fnstart
+  68              	.LFB5410:
+  69              		@ args = 0, pretend = 0, frame = 0
+  70              		@ frame_needed = 0, uses_anonymous_args = 0
+  71 0000 0128     		cmp	r0, #1
+  72 0002 00D0     		beq	.L9
+  73              	.L6:
+  74 0004 7047     		bx	lr
+  75              	.L9:
+  76 0006 4FF6FF73 		movw	r3, #65535
+  77 000a 9942     		cmp	r1, r3
+  78 000c FAD1     		bne	.L6
+  79 000e 10B5     		push	{r4, lr}
+  80 0010 044C     		ldr	r4, .L10
+  81 0012 2046     		mov	r0, r4
+  82 0014 FFF7FEFF 		bl	_ZNSt8ios_base4InitC1Ev
+  83 0018 034A     		ldr	r2, .L10+4
+  84 001a 0449     		ldr	r1, .L10+8
+  85 001c 2046     		mov	r0, r4
+  86 001e FFF7FEFF 		bl	__aeabi_atexit
+  87 0022 10BD     		pop	{r4, pc}
+  88              	.L11:
+  89              		.align	2
+  90              	.L10:
+  91 0024 00000000 		.word	.LANCHOR0
+  92 0028 00000000 		.word	__dso_handle
+  93 002c 00000000 		.word	_ZNSt8ios_base4InitD1Ev
+  94              		.cantunwind
+  95              		.fnend
+  97              		.section	.text.HAL_TIM_PeriodElapsedCallback,"ax",%progbits
+  98              		.align	1
+  99              		.global	HAL_TIM_PeriodElapsedCallback
+ 100              		.syntax unified
+ 101              		.thumb
+ 102              		.thumb_func
+ 104              	HAL_TIM_PeriodElapsedCallback:
+ 105              		.fnstart
+ 106              	.LFB4733:
+ 107              		@ args = 0, pretend = 0, frame = 0
+ 108              		@ frame_needed = 0, uses_anonymous_args = 0
+ 109 0000 08B5     		push	{r3, lr}
+ 110              		.save {r3, lr}
+ 111 0002 0268     		ldr	r2, [r0]
+ 112 0004 034B     		ldr	r3, .L16
+ 113 0006 9A42     		cmp	r2, r3
+ 114 0008 00D0     		beq	.L15
+ 115              	.L12:
+ 116 000a 08BD     		pop	{r3, pc}
+ 117              	.L15:
+ 118 000c FFF7FEFF 		bl	HAL_IncTick
+ 119 0010 FBE7     		b	.L12
+ARM GAS  C:\Users\Simon\AppData\Local\Temp\ccriUYUj.s 			page 3
+
+
+ 120              	.L17:
+ 121 0012 00BF     		.align	2
+ 122              	.L16:
+ 123 0014 00000140 		.word	1073807360
+ 124              		.fnend
+ 126              		.section	.text.Error_Handler,"ax",%progbits
+ 127              		.align	1
+ 128              		.global	Error_Handler
+ 129              		.syntax unified
+ 130              		.thumb
+ 131              		.thumb_func
+ 133              	Error_Handler:
+ 134              		.fnstart
+ 135              	.LFB4734:
+ 136              		@ Volatile: function does not return.
+ 137              		@ args = 0, pretend = 0, frame = 0
+ 138              		@ frame_needed = 0, uses_anonymous_args = 0
+ 139              		@ link register save eliminated.
+ 140              		.syntax unified
+ 141              	@ 209 "Drivers/CMSIS/Include/cmsis_gcc.h" 1
+ 142 0000 72B6     		cpsid i
+ 143              	@ 0 "" 2
+ 144              		.thumb
+ 145              		.syntax unified
+ 146              	.L19:
+ 147 0002 FEE7     		b	.L19
+ 148              		.cantunwind
+ 149              		.fnend
+ 151              		.section	.text._Z18SystemClock_Configv,"ax",%progbits
+ 152              		.align	1
+ 153              		.global	_Z18SystemClock_Configv
+ 154              		.syntax unified
+ 155              		.thumb
+ 156              		.thumb_func
+ 158              	_Z18SystemClock_Configv:
+ 159              		.fnstart
+ 160              	.LFB4731:
+ 161              		@ args = 0, pretend = 0, frame = 112
+ 162              		@ frame_needed = 0, uses_anonymous_args = 0
+ 163 0000 00B5     		push	{lr}
+ 164              		.save {lr}
+ 165              		.pad #116
+ 166 0002 9DB0     		sub	sp, sp, #116
+ 167 0004 4C22     		movs	r2, #76
+ 168 0006 0021     		movs	r1, #0
+ 169 0008 09A8     		add	r0, sp, #36
+ 170 000a FFF7FEFF 		bl	memset
+ 171 000e 2022     		movs	r2, #32
+ 172 0010 0021     		movs	r1, #0
+ 173 0012 01A8     		add	r0, sp, #4
+ 174 0014 FFF7FEFF 		bl	memset
+ 175 0018 0220     		movs	r0, #2
+ 176 001a FFF7FEFF 		bl	HAL_PWREx_ConfigSupply
+ 177 001e 0023     		movs	r3, #0
+ 178 0020 0093     		str	r3, [sp]
+ 179 0022 254B     		ldr	r3, .L27
+ 180 0024 DA6A     		ldr	r2, [r3, #44]
+ARM GAS  C:\Users\Simon\AppData\Local\Temp\ccriUYUj.s 			page 4
+
+
+ 181 0026 22F00102 		bic	r2, r2, #1
+ 182 002a DA62     		str	r2, [r3, #44]
+ 183 002c DB6A     		ldr	r3, [r3, #44]
+ 184 002e 03F00103 		and	r3, r3, #1
+ 185 0032 0093     		str	r3, [sp]
+ 186 0034 214A     		ldr	r2, .L27+4
+ 187 0036 9369     		ldr	r3, [r2, #24]
+ 188 0038 23F44043 		bic	r3, r3, #49152
+ 189 003c 43F48043 		orr	r3, r3, #16384
+ 190 0040 9361     		str	r3, [r2, #24]
+ 191 0042 9369     		ldr	r3, [r2, #24]
+ 192 0044 03F44043 		and	r3, r3, #49152
+ 193 0048 0093     		str	r3, [sp]
+ 194 004a 009B     		ldr	r3, [sp]
+ 195              	.L21:
+ 196 004c 1B4B     		ldr	r3, .L27+4
+ 197 004e 9B69     		ldr	r3, [r3, #24]
+ 198 0050 13F4005F 		tst	r3, #8192
+ 199 0054 FAD0     		beq	.L21
+ 200 0056 0223     		movs	r3, #2
+ 201 0058 0993     		str	r3, [sp, #36]
+ 202 005a 0122     		movs	r2, #1
+ 203 005c 0C92     		str	r2, [sp, #48]
+ 204 005e 4022     		movs	r2, #64
+ 205 0060 0D92     		str	r2, [sp, #52]
+ 206 0062 1293     		str	r3, [sp, #72]
+ 207 0064 0022     		movs	r2, #0
+ 208 0066 1392     		str	r2, [sp, #76]
+ 209 0068 0422     		movs	r2, #4
+ 210 006a 1492     		str	r2, [sp, #80]
+ 211 006c 0922     		movs	r2, #9
+ 212 006e 1592     		str	r2, [sp, #84]
+ 213 0070 1693     		str	r3, [sp, #88]
+ 214 0072 1793     		str	r3, [sp, #92]
+ 215 0074 1893     		str	r3, [sp, #96]
+ 216 0076 0C22     		movs	r2, #12
+ 217 0078 1992     		str	r2, [sp, #100]
+ 218 007a 1A93     		str	r3, [sp, #104]
+ 219 007c 4FF44063 		mov	r3, #3072
+ 220 0080 1B93     		str	r3, [sp, #108]
+ 221 0082 09A8     		add	r0, sp, #36
+ 222 0084 FFF7FEFF 		bl	HAL_RCC_OscConfig
+ 223 0088 90B9     		cbnz	r0, .L25
+ 224 008a 3F23     		movs	r3, #63
+ 225 008c 0193     		str	r3, [sp, #4]
+ 226 008e 0323     		movs	r3, #3
+ 227 0090 0293     		str	r3, [sp, #8]
+ 228 0092 0023     		movs	r3, #0
+ 229 0094 0393     		str	r3, [sp, #12]
+ 230 0096 0493     		str	r3, [sp, #16]
+ 231 0098 0593     		str	r3, [sp, #20]
+ 232 009a 0693     		str	r3, [sp, #24]
+ 233 009c 0793     		str	r3, [sp, #28]
+ 234 009e 0893     		str	r3, [sp, #32]
+ 235 00a0 0121     		movs	r1, #1
+ 236 00a2 01A8     		add	r0, sp, #4
+ 237 00a4 FFF7FEFF 		bl	HAL_RCC_ClockConfig
+ARM GAS  C:\Users\Simon\AppData\Local\Temp\ccriUYUj.s 			page 5
+
+
+ 238 00a8 20B9     		cbnz	r0, .L26
+ 239 00aa 1DB0     		add	sp, sp, #116
+ 240              		@ sp needed
+ 241 00ac 5DF804FB 		ldr	pc, [sp], #4
+ 242              	.L25:
+ 243 00b0 FFF7FEFF 		bl	Error_Handler
+ 244              	.L26:
+ 245 00b4 FFF7FEFF 		bl	Error_Handler
+ 246              	.L28:
+ 247              		.align	2
+ 248              	.L27:
+ 249 00b8 00040058 		.word	1476396032
+ 250 00bc 00480258 		.word	1476544512
+ 251              		.fnend
+ 253              		.section	.text._Z5printISt4spanIKiLj4294967295EEEvRKT_,"axG",%progbits,_Z5printISt4spanIKiLj429496
+ 254              		.align	1
+ 255              		.weak	_Z5printISt4spanIKiLj4294967295EEEvRKT_
+ 256              		.syntax unified
+ 257              		.thumb
+ 258              		.thumb_func
+ 260              	_Z5printISt4spanIKiLj4294967295EEEvRKT_:
+ 261              		.fnstart
+ 262              	.LFB5059:
+ 263              		@ args = 0, pretend = 0, frame = 8
+ 264              		@ frame_needed = 0, uses_anonymous_args = 0
+ 265 0000 30B5     		push	{r4, r5, lr}
+ 266              		.save {r4, r5, lr}
+ 267              		.pad #12
+ 268 0002 83B0     		sub	sp, sp, #12
+ 269 0004 0568     		ldr	r5, [r0]
+ 270 0006 2C46     		mov	r4, r5
+ 271 0008 4368     		ldr	r3, [r0, #4]
+ 272 000a 05EB8305 		add	r5, r5, r3, lsl #2
+ 273 000e 0CE0     		b	.L30
+ 274              	.L31:
+ 275 0010 54F8041B 		ldr	r1, [r4], #4
+ 276 0014 0B48     		ldr	r0, .L33
+ 277 0016 FFF7FEFF 		bl	_ZNSolsEi
+ 278 001a 2023     		movs	r3, #32
+ 279 001c 8DF80730 		strb	r3, [sp, #7]
+ 280 0020 0122     		movs	r2, #1
+ 281 0022 0DF10701 		add	r1, sp, #7
+ 282 0026 FFF7FEFF 		bl	_ZSt16__ostream_insertIcSt11char_traitsIcEERSt13basic_ostreamIT_T0_ES6_PKS3_i
+ 283              	.L30:
+ 284 002a A542     		cmp	r5, r4
+ 285 002c F0D1     		bne	.L31
+ 286 002e 0A23     		movs	r3, #10
+ 287 0030 8DF80730 		strb	r3, [sp, #7]
+ 288 0034 0122     		movs	r2, #1
+ 289 0036 0DF10701 		add	r1, sp, #7
+ 290 003a 0248     		ldr	r0, .L33
+ 291 003c FFF7FEFF 		bl	_ZSt16__ostream_insertIcSt11char_traitsIcEERSt13basic_ostreamIT_T0_ES6_PKS3_i
+ 292 0040 03B0     		add	sp, sp, #12
+ 293              		@ sp needed
+ 294 0042 30BD     		pop	{r4, r5, pc}
+ 295              	.L34:
+ 296              		.align	2
+ARM GAS  C:\Users\Simon\AppData\Local\Temp\ccriUYUj.s 			page 6
+
+
+ 297              	.L33:
+ 298 0044 00000000 		.word	_ZSt4cout
+ 299              		.fnend
+ 301              		.section	.text.main,"ax",%progbits
+ 302              		.align	1
+ 303              		.global	main
+ 304              		.syntax unified
+ 305              		.thumb
+ 306              		.thumb_func
+ 308              	main:
+ 309              		.fnstart
+ 310              	.LFB4610:
+ 311              		@ args = 0, pretend = 0, frame = 56
+ 312              		@ frame_needed = 0, uses_anonymous_args = 0
+ 313 0000 10B5     		push	{r4, lr}
+ 314              		.save {r4, lr}
+ 315              		.pad #56
+ 316 0002 8EB0     		sub	sp, sp, #56
+ 317 0004 FFF7FEFF 		bl	_ZL10MPU_Configv
+ 318 0008 FFF7FEFF 		bl	HAL_Init
+ 319 000c FFF7FEFF 		bl	_Z18SystemClock_Configv
+ 320 0010 06E0     		b	.L39
+ 321              	.L40:
+ 322 0012 0622     		movs	r2, #6
+ 323              	.L36:
+ 324 0014 05AB     		add	r3, sp, #20
+ 325 0016 03EB8403 		add	r3, r3, r4, lsl #2
+ 326 001a 0093     		str	r3, [sp]
+ 327 001c 0192     		str	r2, [sp, #4]
+ 328 001e EAB9     		cbnz	r2, .L42
+ 329              	.L39:
+ 330 0020 114C     		ldr	r4, .L43
+ 331 0022 0DF1140C 		add	ip, sp, #20
+ 332 0026 A646     		mov	lr, r4
+ 333 0028 BEE80F00 		ldmia	lr!, {r0, r1, r2, r3}
+ 334 002c ACE80F00 		stmia	ip!, {r0, r1, r2, r3}
+ 335 0030 BEE80F00 		ldmia	lr!, {r0, r1, r2, r3}
+ 336 0034 ACE80F00 		stmia	ip!, {r0, r1, r2, r3}
+ 337 0038 DEF80030 		ldr	r3, [lr]
+ 338 003c CCF80030 		str	r3, [ip]
+ 339 0040 0DF1080C 		add	ip, sp, #8
+ 340 0044 04F12403 		add	r3, r4, #36
+ 341 0048 93E80700 		ldm	r3, {r0, r1, r2}
+ 342 004c 8CE80700 		stm	ip, {r0, r1, r2}
+ 343 0050 0024     		movs	r4, #0
+ 344              	.L38:
+ 345 0052 A31D     		adds	r3, r4, #6
+ 346 0054 092B     		cmp	r3, #9
+ 347 0056 DCD9     		bls	.L40
+ 348 0058 0022     		movs	r2, #0
+ 349 005a DBE7     		b	.L36
+ 350              	.L42:
+ 351 005c 6846     		mov	r0, sp
+ 352 005e FFF7FEFF 		bl	_Z5printISt4spanIKiLj4294967295EEEvRKT_
+ 353 0062 0134     		adds	r4, r4, #1
+ 354 0064 F5E7     		b	.L38
+ 355              	.L44:
+ARM GAS  C:\Users\Simon\AppData\Local\Temp\ccriUYUj.s 			page 7
+
+
+ 356 0066 00BF     		.align	2
+ 357              	.L43:
+ 358 0068 00000000 		.word	.LANCHOR1
+ 359              		.fnend
+ 361              		.section	.text._GLOBAL__sub_I_main,"ax",%progbits
+ 362              		.align	1
+ 363              		.syntax unified
+ 364              		.thumb
+ 365              		.thumb_func
+ 367              	_GLOBAL__sub_I_main:
+ 368              		.fnstart
+ 369              	.LFB5411:
+ 370              		@ args = 0, pretend = 0, frame = 0
+ 371              		@ frame_needed = 0, uses_anonymous_args = 0
+ 372 0000 08B5     		push	{r3, lr}
+ 373 0002 4FF6FF71 		movw	r1, #65535
+ 374 0006 0120     		movs	r0, #1
+ 375 0008 FFF7FEFF 		bl	_Z41__static_initialization_and_destruction_0ii
+ 376 000c 08BD     		pop	{r3, pc}
+ 377              		.cantunwind
+ 378              		.fnend
+ 380              		.section	.init_array,"aw",%init_array
+ 381              		.align	2
+ 382 0000 00000000 		.word	_GLOBAL__sub_I_main(target1)
+ 383              		.section	.rodata
+ 384              		.align	2
+ 385              		.set	.LANCHOR1,. + 0
+ 386              	.LC0:
+ 387 0000 00000000 		.word	0
+ 388 0004 01000000 		.word	1
+ 389 0008 02000000 		.word	2
+ 390 000c 03000000 		.word	3
+ 391 0010 04000000 		.word	4
+ 392 0014 05000000 		.word	5
+ 393 0018 06000000 		.word	6
+ 394 001c 07000000 		.word	7
+ 395 0020 08000000 		.word	8
+ 396              	.LC1:
+ 397 0024 08000000 		.word	8
+ 398 0028 07000000 		.word	7
+ 399 002c 06000000 		.word	6
+ 400              		.section	.bss._ZStL8__ioinit,"aw",%nobits
+ 401              		.align	2
+ 402              		.set	.LANCHOR0,. + 0
+ 405              	_ZStL8__ioinit:
+ 406 0000 00       		.space	1
+ 407              		.hidden	__dso_handle
+ 408              		.ident	"GCC: (GNU Toolchain for the Arm Architecture 11.2-2022.02 (arm-11.16)) 11.2.1 20220111"
+ARM GAS  C:\Users\Simon\AppData\Local\Temp\ccriUYUj.s 			page 8
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 main.cpp
+C:\Users\Simon\AppData\Local\Temp\ccriUYUj.s:17     .text._ZL10MPU_Configv:00000000 $t
+C:\Users\Simon\AppData\Local\Temp\ccriUYUj.s:22     .text._ZL10MPU_Configv:00000000 _ZL10MPU_Configv
+ .ARM.exidx.text._ZL10MPU_Configv:00000000 $d
+C:\Users\Simon\AppData\Local\Temp\ccriUYUj.s:61     .text._Z41__static_initialization_and_destruction_0ii:00000000 $t
+C:\Users\Simon\AppData\Local\Temp\ccriUYUj.s:66     .text._Z41__static_initialization_and_destruction_0ii:00000000 _Z41__static_initialization_and_destruction_0ii
+C:\Users\Simon\AppData\Local\Temp\ccriUYUj.s:91     .text._Z41__static_initialization_and_destruction_0ii:00000024 $d
+.ARM.exidx.text._Z41__static_initialization_and_destruction_0ii:00000000 $d
+C:\Users\Simon\AppData\Local\Temp\ccriUYUj.s:98     .text.HAL_TIM_PeriodElapsedCallback:00000000 $t
+C:\Users\Simon\AppData\Local\Temp\ccriUYUj.s:104    .text.HAL_TIM_PeriodElapsedCallback:00000000 HAL_TIM_PeriodElapsedCallback
+C:\Users\Simon\AppData\Local\Temp\ccriUYUj.s:123    .text.HAL_TIM_PeriodElapsedCallback:00000014 $d
+.ARM.extab.text.HAL_TIM_PeriodElapsedCallback:00000000 $d
+.ARM.exidx.text.HAL_TIM_PeriodElapsedCallback:00000000 $d
+C:\Users\Simon\AppData\Local\Temp\ccriUYUj.s:127    .text.Error_Handler:00000000 $t
+C:\Users\Simon\AppData\Local\Temp\ccriUYUj.s:133    .text.Error_Handler:00000000 Error_Handler
+    .ARM.exidx.text.Error_Handler:00000000 $d
+C:\Users\Simon\AppData\Local\Temp\ccriUYUj.s:152    .text._Z18SystemClock_Configv:00000000 $t
+C:\Users\Simon\AppData\Local\Temp\ccriUYUj.s:158    .text._Z18SystemClock_Configv:00000000 _Z18SystemClock_Configv
+C:\Users\Simon\AppData\Local\Temp\ccriUYUj.s:249    .text._Z18SystemClock_Configv:000000b8 $d
+.ARM.exidx.text._Z18SystemClock_Configv:00000000 $d
+C:\Users\Simon\AppData\Local\Temp\ccriUYUj.s:254    .text._Z5printISt4spanIKiLj4294967295EEEvRKT_:00000000 $t
+C:\Users\Simon\AppData\Local\Temp\ccriUYUj.s:260    .text._Z5printISt4spanIKiLj4294967295EEEvRKT_:00000000 _Z5printISt4spanIKiLj4294967295EEEvRKT_
+C:\Users\Simon\AppData\Local\Temp\ccriUYUj.s:298    .text._Z5printISt4spanIKiLj4294967295EEEvRKT_:00000044 $d
+.ARM.exidx.text._Z5printISt4spanIKiLj4294967295EEEvRKT_:00000000 $d
+C:\Users\Simon\AppData\Local\Temp\ccriUYUj.s:302    .text.main:00000000 $t
+C:\Users\Simon\AppData\Local\Temp\ccriUYUj.s:308    .text.main:00000000 main
+C:\Users\Simon\AppData\Local\Temp\ccriUYUj.s:358    .text.main:00000068 $d
+             .ARM.exidx.text.main:00000000 $d
+C:\Users\Simon\AppData\Local\Temp\ccriUYUj.s:362    .text._GLOBAL__sub_I_main:00000000 $t
+C:\Users\Simon\AppData\Local\Temp\ccriUYUj.s:367    .text._GLOBAL__sub_I_main:00000000 _GLOBAL__sub_I_main
+.ARM.exidx.text._GLOBAL__sub_I_main:00000000 $d
+C:\Users\Simon\AppData\Local\Temp\ccriUYUj.s:381    .init_array:00000000 $d
+C:\Users\Simon\AppData\Local\Temp\ccriUYUj.s:384    .rodata:00000000 $d
+C:\Users\Simon\AppData\Local\Temp\ccriUYUj.s:401    .bss._ZStL8__ioinit:00000000 $d
+C:\Users\Simon\AppData\Local\Temp\ccriUYUj.s:405    .bss._ZStL8__ioinit:00000000 _ZStL8__ioinit
+
+UNDEFINED SYMBOLS
+HAL_MPU_Disable
+HAL_MPU_ConfigRegion
+HAL_MPU_Enable
+__aeabi_unwind_cpp_pr0
+_ZNSt8ios_base4InitC1Ev
+__aeabi_atexit
+__dso_handle
+_ZNSt8ios_base4InitD1Ev
+HAL_IncTick
+__aeabi_unwind_cpp_pr1
+memset
+HAL_PWREx_ConfigSupply
+HAL_RCC_OscConfig
+HAL_RCC_ClockConfig
+_ZNSolsEi
+_ZSt16__ostream_insertIcSt11char_traitsIcEERSt13basic_ostreamIT_T0_ES6_PKS3_i
+_ZSt4cout
+HAL_Init
